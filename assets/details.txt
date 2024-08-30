@@ -1,0 +1,7 @@
+Colors:
+Teal: #14d9c5
+Gray: #3d3d3d
+Orange: #f8680c
+White: #ffffff
+
+Font: Helvetica World
