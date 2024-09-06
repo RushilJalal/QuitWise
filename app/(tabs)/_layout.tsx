@@ -8,6 +8,7 @@ import { useColorScheme } from "@/components/useColorScheme";
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 import { View } from "@/components/Themed";
 import HeaderRight from "@/components/HeaderRight";
+import HamburgerMenuButton from "@/components/HamburgerMenuButton";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -34,12 +35,21 @@ export default function TabLayout() {
             Colors[colorScheme ?? "light"].tabIconDefault,
           headerShown: useClientOnlyValue(false, true),
           headerBackground: () => (
-            <View
-              style={{
-                backgroundColor: Colors[colorScheme ?? "light"].background,
-                height: 100,
-              }}
-            />
+            <>
+              <View
+                style={{
+                  backgroundColor: Colors[colorScheme ?? "light"].background,
+                  height: 100,
+                }}
+              />
+              <View
+                style={{
+                  height: 8,
+                  backgroundColor: "#e1e4e7",
+                  marginBottom: 10,
+                }}
+              />
+            </>
           ),
         }}
       >
@@ -51,24 +61,7 @@ export default function TabLayout() {
               color: "black",
             },
             tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-            //hamburger menu on header left
-            headerLeft: () => (
-              <Link href="/menu" asChild>
-                <Pressable>
-                  {({ pressed }) => (
-                    <FontAwesome
-                      name="bars"
-                      size={25}
-                      color={"black"}
-                      style={{
-                        marginLeft: 15,
-                        opacity: pressed ? 0.5 : 1,
-                      }}
-                    />
-                  )}
-                </Pressable>
-              </Link>
-            ),
+            headerLeft: () => <HamburgerMenuButton />,
             headerRight: () => <HeaderRight />,
           }}
         />
@@ -80,9 +73,9 @@ export default function TabLayout() {
               color: "black",
             },
             tabBarIcon: ({ color }) => (
-              // <Foundation name="telephone" size={24} color="white" />
               <TabBarIcon name="phone" color={color} />
             ),
+            headerLeft: () => <HamburgerMenuButton />,
           }}
         />
         <Tabs.Screen
@@ -93,9 +86,9 @@ export default function TabLayout() {
               color: "black",
             },
             tabBarIcon: ({ color }) => (
-              // <MaterialIcons name="leaderboard" size={24} color="white" />
               <TabBarIcon name="trophy" color={color} />
             ),
+            headerLeft: () => <HamburgerMenuButton />,
           }}
         />
         <Tabs.Screen
@@ -105,10 +98,8 @@ export default function TabLayout() {
             headerTitleStyle: {
               color: "black",
             },
-            tabBarIcon: ({ color }) => (
-              // <MaterialIcons name="leaderboard" size={24} color="white" />
-              <TabBarIcon name="cog" color={color} />
-            ),
+            tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
+            headerLeft: () => <HamburgerMenuButton />,
           }}
         />
       </Tabs>

@@ -14,6 +14,6 @@ export default {
     background: "white",
     tint: "#14d9c5",
     tabIconDefault: "white",
-    tabIconSelected: "purple",
+    tabIconSelected: "#026873",
   },
 };
