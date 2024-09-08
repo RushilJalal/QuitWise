@@ -6,29 +6,30 @@ import { View, Text, StyleSheet } from "react-native";
 const EpigeneticAwareness = () => {
   return (
     <View style={styles.container}>
-      {/* <ButtonContainer>
-        <ButtonLink
-          href="/"
-          imageSource={require("../../assets/know button.png")}
-        />
-        <ButtonLink
-          href="/"
-          imageSource={require("../../assets/learn button.png")}
-        />
-      </ButtonContainer> */}
+      <ButtonLink
+        href="/"
+        imageSource={require("../assets/know button.png")}
+        style={styles.img}
+      />
+      <ButtonLink
+        href="/Quiz"
+        imageSource={require("../assets/test button.png")}
+        style={styles.img}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
-    padding: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
   },
-  text: {
-    fontSize: 20,
+  img: {
+    width: 300,
+    height: 200,
+    borderRadius: 5,
   },
 });
 

@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 18,
     fontWeight: "500",
+    color: "#3d3d3d",
   },
   buttonContainer: {
     marginTop: 20,
