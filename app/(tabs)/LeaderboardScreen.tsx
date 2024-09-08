@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import EditScreenInfo from "@/components/EditScreenInfo";
 import { Text, View } from "@/components/Themed";
 
-const DummyPage: React.FC = () => {
+const LeaderboardScreen: React.FC = () => {
   return (
     <View>
       <EditScreenInfo path="/app/tabs/leaderboard.tsx" />
@@ -11,4 +11,4 @@ const DummyPage: React.FC = () => {
   );
 };
 
-export default DummyPage;
+export default LeaderboardScreen;

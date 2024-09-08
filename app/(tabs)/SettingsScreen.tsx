@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Text, View } from "@/components/Themed";
 
-const SettingsPage: React.FC = () => {
+const SettingsScreen: React.FC = () => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [vibrationEnabled, setVibrationEnabled] = useState(false);
@@ -122,4 +122,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsPage;
+export default SettingsScreen;
