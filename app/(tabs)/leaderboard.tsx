@@ -6,7 +6,7 @@ import { Text, View } from "@/components/Themed";
 const DummyPage: React.FC = () => {
   return (
     <View>
-      <EditScreenInfo path="/app/%28tabs%29/leaderboard.tsx" />
+      <EditScreenInfo path="/app/tabs/leaderboard.tsx" />
     </View>
   );
 };

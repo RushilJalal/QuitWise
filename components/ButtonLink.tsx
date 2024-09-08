@@ -1,17 +1,31 @@
 import React from "react";
-import { TouchableOpacity, Image, StyleSheet } from "react-native";
+import {
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  ViewStyle,
+  ImageStyle,
+} from "react-native";
 import { Link, Href } from "expo-router";
 
 interface ButtonLinkProps {
   href: string;
   imageSource: any;
+  style?: ViewStyle | ImageStyle; // Optional style prop
 }
 
-const ButtonLink: React.FC<ButtonLinkProps> = ({ href, imageSource }) => {
+const ButtonLink: React.FC<ButtonLinkProps> = ({
+  href,
+  imageSource,
+  style,
+}) => {
   return (
     <Link href={href as Href<string | object>} asChild>
-      <TouchableOpacity style={styles.button}>
-        <Image source={imageSource} style={styles.image} />
+      <TouchableOpacity style={StyleSheet.flatten([styles.button, style])}>
+        <Image
+          source={imageSource}
+          style={StyleSheet.flatten([styles.image, style])}
+        />
       </TouchableOpacity>
     </Link>
   );

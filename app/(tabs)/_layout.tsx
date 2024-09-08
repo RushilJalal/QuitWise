@@ -1,12 +1,11 @@
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Link, Tabs } from "expo-router";
-import { Pressable, Image, Text, Platform } from "react-native";
+import { Tabs } from "expo-router";
+import { View } from "react-native";
 
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
-import { View } from "@/components/Themed";
 import HeaderRight from "@/components/HeaderRight";
 import HamburgerMenuButton from "@/components/HamburgerMenuButton";
 
@@ -66,7 +65,7 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="two"
+          name="CallTab"
           options={{
             title: "Call",
             headerTitleStyle: {

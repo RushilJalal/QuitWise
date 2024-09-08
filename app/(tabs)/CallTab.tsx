@@ -1,13 +1,13 @@
-import { StyleSheet, View } from "react-native";
-import { Text } from "@/components/Themed";
-import ButtonLink from "@/components/ButtonLink";
-import ButtonContainer from "@/components/ButtonContainer";
-import { StatusBar } from "expo-status-bar";
+import { StyleSheet } from "react-native";
 
-export default function Home() {
+import EditScreenInfo from "@/components/EditScreenInfo";
+import { Text, View } from "@/components/Themed";
+import ButtonContainer from "@/components/ButtonContainer";
+import ButtonLink from "@/components/ButtonLink";
+
+export default function CallTab() {
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
       <ButtonContainer>
         <ButtonLink
           href="/EpigeneticAwareness"
@@ -47,5 +47,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  separator: {
+    marginVertical: 30,
+    height: 1,
+    width: "80%",
   },
 });
