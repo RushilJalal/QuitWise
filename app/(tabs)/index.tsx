@@ -4,7 +4,7 @@ import ButtonLink from "@/components/ButtonLink";
 import ButtonContainer from "@/components/ButtonContainer";
 import { StatusBar } from "expo-status-bar";
 
-export default function HomeScreen() {
+export default function Index() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />

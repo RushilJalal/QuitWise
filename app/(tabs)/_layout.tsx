@@ -1,4 +1,3 @@
-// src/screens/_layout.tsx
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -8,8 +7,7 @@ import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 import HeaderRight from "@/components/HeaderRight";
-import HamburgerMenuButton from "@/components/HamburgerMenuButton";
-import HomeScreen from "@/app/(tabs)/HomeScreen";
+import Index from "@/app/(tabs)";
 import CallScreen from "@/app/(tabs)/CallScreen";
 import LeaderboardScreen from "@/app/(tabs)/LeaderboardScreen";
 import SettingsScreen from "@/app/(tabs)/SettingsScreen";
@@ -28,6 +26,7 @@ export default function TabLayout() {
 
   return (
     <Tabs.Navigator
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tabIconSelected,
         tabBarStyle: {
@@ -58,14 +57,14 @@ export default function TabLayout() {
     >
       <Tabs.Screen
         name="Home"
-        component={HomeScreen}
+        component={Index}
         options={{
           title: "Home",
           headerTitleStyle: {
             color: "black",
+            // fontWeight: "bold",
           },
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          headerLeft: () => <HamburgerMenuButton />,
           headerRight: () => <HeaderRight />,
         }}
       />
@@ -78,7 +77,6 @@ export default function TabLayout() {
             color: "black",
           },
           tabBarIcon: ({ color }) => <TabBarIcon name="phone" color={color} />,
-          headerLeft: () => <HamburgerMenuButton />,
         }}
       />
       <Tabs.Screen
@@ -90,7 +88,6 @@ export default function TabLayout() {
             color: "black",
           },
           tabBarIcon: ({ color }) => <TabBarIcon name="trophy" color={color} />,
-          headerLeft: () => <HamburgerMenuButton />,
         }}
       />
       <Tabs.Screen
@@ -102,7 +99,6 @@ export default function TabLayout() {
             color: "black",
           },
           tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
-          headerLeft: () => <HamburgerMenuButton />,
         }}
       />
     </Tabs.Navigator>

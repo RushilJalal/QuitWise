@@ -11,7 +11,7 @@ import { Link, Href } from "expo-router";
 interface ButtonLinkProps {
   href: string;
   imageSource: any;
-  style?: ViewStyle | ImageStyle; // Optional style prop
+  style?: ViewStyle | ImageStyle;
 }
 
 const ButtonLink: React.FC<ButtonLinkProps> = ({

@@ -6,8 +6,11 @@ import {
   Alert,
   ScrollView,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 import { Text, View } from "@/components/Themed";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useNavigation } from "expo-router";
 
 const SettingsScreen: React.FC = () => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
@@ -17,15 +20,40 @@ const SettingsScreen: React.FC = () => {
   const [dailyInfo, setDailyInfo] = useState(false);
 
   const handleContactUs = () => {
-    Alert.alert("Contact Us", "You can contact us at support@example.com");
+    const email = "rushiljalal@gmail.com";
+    const subject = "Contact Us";
+    const body = "Hello, I would like to get in touch with you regarding...";
+    const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    Linking.canOpenURL(mailtoUrl)
+      .then((supported) => {
+        if (supported) {
+          Linking.openURL(mailtoUrl);
+        } else {
+          Alert.alert("Error", "Unable to open email client.");
+        }
+      })
+      .catch((err) => console.error("An error occurred", err));
   };
 
   const handleFeedback = () => {
     Alert.alert("Feedback", "Thank you for your feedback!");
   };
 
+  const navigation = useNavigation();
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <TouchableOpacity
+        style={styles.settingItem}
+        onPress={() => navigation.navigate("UserProfile")}
+        activeOpacity={1}
+      >
+        <Text style={styles.label}>Profile</Text>
+        <MaterialIcons name="navigate-next" size={24} color="black" />
+      </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.settingItem}
         onPress={() => setNotificationsEnabled(!notificationsEnabled)}
