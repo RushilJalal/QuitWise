@@ -1,56 +1,133 @@
-import { StyleSheet } from "react-native";
-
-import EditScreenInfo from "@/components/EditScreenInfo";
+import React from "react";
+import {
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Linking,
+  Image,
+} from "react-native";
 import { Text, View } from "@/components/Themed";
-import ButtonContainer from "@/components/ButtonContainer";
-import ButtonLink from "@/components/ButtonLink";
 
 export default function CallScreen() {
+  const handleCallPress = () => {
+    Linking.openURL("tel:9560676967");
+  };
+
+  const handleEmailPress = () => {
+    Linking.openURL("mailto:example@example.com");
+  };
+
   return (
-    <View style={styles.container}>
-      <ButtonContainer>
-        <ButtonLink
-          href="/EpigeneticAwareness"
-          imageSource={require("../../assets/epigenetic awareness.png")}
-        />
-        <ButtonLink
-          href="/VRTherapy"
-          imageSource={require("../../assets/vr therapy.png")}
-        />
-        <ButtonLink
-          href="/AlcoholRecovery"
-          imageSource={require("../../assets/alcohol recovery.png")}
-        />
-        <ButtonLink
-          href="/SmokingCessation"
-          imageSource={require("../../assets/smoking cessation.png")}
-        />
-        <ButtonLink
-          href="/MentalHealthSupport"
-          imageSource={require("../../assets/mental health support.png")}
-        />
-        <ButtonLink
-          href="/ProgressTracking"
-          imageSource={require("../../assets/progress tracking.png")}
-        />
-      </ButtonContainer>
-    </View>
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.mainbutton} onPress={handleCallPress}>
+          <Image
+            source={require("../../assets/mahe.jpeg")}
+            style={styles.mainButtonImage}
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.buttonText}>Department Name</Text>
+            <Text style={styles.phone}>+91 95606 76967</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleEmailPress}>
+          <Image
+            source={require("../../assets/pfp.png")}
+            style={styles.buttonImage}
+          />
+          <Text style={styles.buttonText}>Email example@example.com</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleEmailPress}>
+          <Image
+            source={require("../../assets/pfp.png")}
+            style={styles.buttonImage}
+          />
+          <Text style={styles.buttonText}>Email example@example.com</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleEmailPress}>
+          <Image
+            source={require("../../assets/pfp.png")}
+            style={styles.buttonImage}
+          />
+          <Text style={styles.buttonText}>Email example@example.com</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleEmailPress}>
+          <Image
+            source={require("../../assets/pfp.png")}
+            style={styles.buttonImage}
+          />
+          <Text style={styles.buttonText}>Email example@example.com</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    padding: 30,
   },
-  title: {
-    fontSize: 20,
+  button: {
+    flexDirection: "row",
+    backgroundColor: "white",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 25,
+    marginVertical: 10,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
+    width: "70%",
+    height: 120,
+  },
+  mainButtonImage: {
+    width: 120,
+    height: 120,
+    marginRight: 10,
+  },
+  buttonImage: {
+    width: 120,
+    height: 120,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: "#3d3d3d",
     fontWeight: "bold",
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  mainbutton: {
+    flexDirection: "row",
+    backgroundColor: "white",
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 25,
+    marginVertical: 10,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
+    borderColor: "#14d9c5",
+    borderWidth: 5,
   },
+  textContainer: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  phone:{
+    fontSize: 15,
+    color: "#3d3d3d",
+    marginTop: 5,
+  }
 });

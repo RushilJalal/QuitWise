@@ -7,7 +7,7 @@ const EpigeneticAwareness = () => {
   return (
     <View style={styles.container}>
       <ButtonLink
-        href="/"
+        href="/Flashcards"
         imageSource={require("../assets/know button.png")}
         style={styles.img}
       />

@@ -13,7 +13,7 @@ import ButtonLink from "@/components/ButtonLink";
 const userProfile = {
   name: "Rushil Jalal",
   email: "rushiljalal@gmail.com",
-  profilePicture: require("../assets/pfp.png"),
+  profilePicture: require("../assets/avatars/whiteman.png"),
   joinDate: "Joined in 2024",
   bio: "Passionate about epigenetics and helping others recover from addiction.",
   location: "New York, USA",
@@ -81,9 +81,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   profilePicture: {
-    width: 250,
-    height: 250,
+    width: 200,
+    height: 200,
     borderRadius: 75,
+    marginBottom: 16,
   },
   name: {
     fontSize: 24,

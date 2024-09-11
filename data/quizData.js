@@ -81,13 +81,3 @@ export const quizData = [
     }
 ];
 
-function checkAnswers(userAnswers) {
-    let score = 0;
-    quizData.forEach((question, index) => {
-        if (userAnswers[index] === question.answer) {
-            score++;
-        }
-    });
-    return score;
-}
-
