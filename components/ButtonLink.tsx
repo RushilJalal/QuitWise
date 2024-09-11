@@ -24,7 +24,7 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
       <TouchableOpacity style={StyleSheet.flatten([styles.button, style])}>
         <Image
           source={imageSource}
-          style={StyleSheet.flatten([styles.image, style])}
+          style={StyleSheet.flatten([styles.image, style]) as never}
         />
       </TouchableOpacity>
     </Link>

@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
+import useStore from "../useStore";
 
 const AlcoholTracker = () => {
-  const [lastDrinkTime, setLastDrinkTime] = useState<Date | null>(null);
-  const [elapsedDrinkTime, setElapsedDrinkTime] = useState("");
-  const [progress, setProgress] = useState(0);
+  const {
+    lastDrinkTime,
+    elapsedDrinkTime,
+    progress,
+    longestStreak,
+    setLastDrinkTime,
+    setElapsedDrinkTime,
+    setProgress,
+    setLongestStreak,
+  } = useStore();
 
+  //loads the last drink time from storage and updates state
   useEffect(() => {
     const loadLastDrinkTime = async () => {
       try {
@@ -15,7 +24,7 @@ const AlcoholTracker = () => {
         if (storedTime) {
           const lastTime = new Date(storedTime);
           setLastDrinkTime(lastTime);
-          setElapsedDrinkTime(calculateElapsedTime(lastTime));
+          setElapsedDrinkTime(calculateElapsedDays(lastTime));
           setProgress(calculateProgress(lastTime));
         }
       } catch (error) {
@@ -24,43 +33,64 @@ const AlcoholTracker = () => {
     };
 
     loadLastDrinkTime();
-  }, []);
+  }, [setLastDrinkTime, setElapsedDrinkTime, setProgress]);
 
+  //loads the longest streak from storage and updates state
   useEffect(() => {
     const interval = setInterval(() => {
       if (lastDrinkTime) {
-        setElapsedDrinkTime(calculateElapsedTime(lastDrinkTime));
+        setElapsedDrinkTime(calculateElapsedDays(lastDrinkTime));
         setProgress(calculateProgress(lastDrinkTime));
       }
-    }, 1000);
+    }, 3600000);
 
     return () => clearInterval(interval);
-  }, [lastDrinkTime]);
+  }, [lastDrinkTime, setElapsedDrinkTime, setProgress]);
 
-  const calculateElapsedTime = (startTime: Date) => {
+  //sets longestStreak if elapsedDrinkTime is greater than longestStreak
+  useEffect(() => {
+    if (lastDrinkTime) {
+      const now = new Date();
+      const elapsed = now.getTime() - lastDrinkTime.getTime();
+      const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+      if (days > longestStreak) {
+        setLongestStreak(days);
+        try {
+          AsyncStorage.setItem("longestStreak", days.toString());
+        } catch (error) {
+          console.error("Failed to save longest streak:", error);
+        }
+      }
+    }
+  }, [lastDrinkTime, longestStreak, setLongestStreak]);
+
+  const calculateElapsedDays = (startTime: Date): number => {
     const now = new Date();
     const elapsed = now.getTime() - startTime.getTime();
-    const hours = Math.floor(elapsed / (1000 * 60 * 60));
-    const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
-    return `${hours}h ${minutes}m ${seconds}s`;
+    return Math.floor(elapsed / (1000 * 60 * 60 * 24));
   };
 
-  const calculateProgress = (startTime: Date) => {
+  const calculateProgress = (startTime: Date): number => {
     const now = new Date();
     const elapsed = now.getTime() - startTime.getTime();
-    const total = 100000; // 24 hours in milliseconds
+    const total = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
     return (elapsed / total) * 100;
   };
 
   const updateLastDrinkTime = async () => {
     const now = new Date();
     setLastDrinkTime(now);
+    setElapsedDrinkTime(0); // Reset elapsed drink time
+    setProgress(0); // Reset progress
     try {
       await AsyncStorage.setItem("lastDrinkTime", now.toISOString());
     } catch (error) {
       console.error("Failed to save last drink time:", error);
     }
+  };
+
+  const getTintColor = (progress: number) => {
+    return progress >= 100 ? "purple" : "#14d9c5";
   };
 
   return (
@@ -70,12 +100,19 @@ const AlcoholTracker = () => {
         size={250}
         width={15}
         fill={progress}
-        tintColor="#14d9c5"
+        tintColor={getTintColor(progress)}
         backgroundColor="#727272"
         style={styles.progress}
       >
-        {() => <Text style={styles.time}>{elapsedDrinkTime || "N/A"}</Text>}
+        {() => (
+          <Text style={styles.time}>
+            {elapsedDrinkTime} {elapsedDrinkTime === 1 ? "Day" : "Days"}
+          </Text>
+        )}
       </AnimatedCircularProgress>
+      <Text style={styles.longestStreak}>
+        Longest Streak: {longestStreak} {longestStreak === 1 ? "Day" : "Days"}
+      </Text>
       <TouchableOpacity style={styles.button} onPress={updateLastDrinkTime}>
         <Text style={styles.buttonText}>Reset</Text>
       </TouchableOpacity>
@@ -97,9 +134,10 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   time: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 35,
+    fontWeight: "800",
     color: "#333",
+    textAlign: "center",
   },
   progress: {
     marginBottom: 30,
@@ -123,6 +161,12 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 25,
     color: "#fff",
+    fontWeight: "bold",
+  },
+  longestStreak: {
+    fontSize: 20,
+    color: "#333",
+    marginVertical: 20,
     fontWeight: "bold",
   },
 });

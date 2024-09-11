@@ -47,7 +47,7 @@ const SettingsScreen: React.FC = () => {
     <ScrollView contentContainerStyle={styles.container}>
       <TouchableOpacity
         style={styles.settingItem}
-        onPress={() => navigation.navigate("UserProfile")}
+        onPress={() => navigation.navigate("UserProfile" as never)}
         activeOpacity={1}
       >
         <Text style={styles.label}>Profile</Text>
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 3,
+    height: 60,
   },
   label: {
     fontSize: 18,

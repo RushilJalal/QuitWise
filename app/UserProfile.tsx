@@ -1,26 +1,37 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  Button,
+} from "react-native";
+import useStore from "../useStore";
+import ButtonLink from "@/components/ButtonLink";
 
 const userProfile = {
-  name: "John Doe",
-  email: "john.doe@example.com",
-  profilePicture: "https://via.placeholder.com/150",
+  name: "Rushil Jalal",
+  email: "rushiljalal@gmail.com",
+  profilePicture: require("../assets/pfp.png"),
+  joinDate: "Joined in 2021",
   bio: "Passionate about epigenetics and helping others recover from addiction.",
   location: "New York, USA",
   interests: ["Epigenetics", "Health", "Wellness", "Recovery"],
 };
 
 export default function UserProfile() {
+  const { longestStreak } = useStore();
+
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Image
-        source={{ uri: userProfile.profilePicture }}
+        source={userProfile.profilePicture}
         style={styles.profilePicture}
       />
       <Text style={styles.name}>{userProfile.name}</Text>
       <Text style={styles.email}>{userProfile.email}</Text>
-      <Text style={styles.bio}>{userProfile.bio}</Text>
-      <Text style={styles.location}>{userProfile.location}</Text>
+      <Text style={styles.date}>{userProfile.joinDate}</Text>
       <Text style={styles.interestsTitle}>Interests:</Text>
       <View style={styles.interestsContainer}>
         {userProfile.interests.map((interest, index) => (
@@ -29,21 +40,59 @@ export default function UserProfile() {
           </Text>
         ))}
       </View>
-    </View>
+      <Text style={styles.title}>Overview:</Text>
+      <View style={styles.overviewContainer}>
+        <View style={styles.overview}>
+          <Image
+            style={{ width: 20, height: 28 }}
+            source={require("../assets/alcohol top right.png")}
+          />
+          <Text>Longest streak:</Text>
+          <Text>{longestStreak} days</Text>
+        </View>
+        <View style={styles.overview}>
+          <Image
+            style={{ width: 25, height: 25 }}
+            source={require("../assets/cigarette.png")}
+          />
+          <Text>Longest streak:</Text>
+          <Text>{longestStreak} days</Text>
+        </View>
+      </View>
+      <ButtonLink
+        href=""
+        imageSource={require("../assets/daily consumption.png")}
+        style={styles.profileButtons}
+      />
+      <ButtonLink
+        href=""
+        imageSource={require("../assets/change username.png")}
+        style={styles.profileButtons}
+      />
+      <ButtonLink
+        href=""
+        imageSource={require("../assets/change password.png")}
+        style={styles.profileButtons}
+      />
+      <ButtonLink
+        href=""
+        imageSource={require("../assets/sign out.png")}
+        style={styles.profileButtons}
+      />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: "center",
     padding: 16,
   },
   profilePicture: {
-    width: 150,
-    height: 150,
+    width: 200,
+    height: 200,
     borderRadius: 75,
-    marginBottom: 16,
   },
   name: {
     fontSize: 24,
@@ -55,9 +104,9 @@ const styles = StyleSheet.create({
     color: "gray",
     marginBottom: 16,
   },
-  bio: {
+  date: {
     fontSize: 16,
-    textAlign: "center",
+    color: "black",
     marginBottom: 16,
   },
   location: {
@@ -81,5 +130,35 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 16,
     margin: 4,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginVertical: 16,
+    textAlign: "left",
+  },
+  overviewContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+  },
+  overview: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#f9f9f9",
+    padding: 16,
+    borderRadius: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
+    marginBottom: 16,
+    gap: 8,
+  },
+  profileButtons: {
+    width: "100%",
+    height: 100,
   },
 });

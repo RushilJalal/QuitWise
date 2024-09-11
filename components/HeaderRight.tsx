@@ -2,9 +2,13 @@ import React from "react";
 import { View, Pressable, Image, Text } from "react-native";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
+import useStore from "../useStore";
 
 const HeaderRight = () => {
   const colorScheme = useColorScheme();
+  const elapsedDrinkTime = useStore((state) => {
+    return state.elapsedDrinkTime;
+  });
 
   return (
     <View style={{ flexDirection: "row" }}>
@@ -33,7 +37,7 @@ const HeaderRight = () => {
                 fontWeight: "bold",
               }}
             >
-              42
+              {elapsedDrinkTime}
             </Text>
           </View>
         )}
