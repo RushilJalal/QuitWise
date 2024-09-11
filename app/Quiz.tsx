@@ -4,40 +4,60 @@ import { quizData } from "../data/quizData";
 
 const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showResult, setShowResult] = useState(false);
 
-  const handleOptionPress = () => {
+  const handleOptionPress = (selectedOption: string): void => {
+    const currentQuestion = quizData[currentQuestionIndex];
+    if (selectedOption === currentQuestion.answer) {
+      setScore(score + 1);
+    }
+
     if (currentQuestionIndex < quizData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      alert("Quiz completed!");
+      setShowResult(true);
     }
   };
+
+  if (showResult) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.resultText}>Quiz Completed!</Text>
+        <Text style={styles.resultText}>
+          Your Score: {score}/{quizData.length}
+        </Text>
+      </View>
+    );
+  }
 
   const currentQuestion = quizData[currentQuestionIndex];
 
   return (
-    <View style={styles.questionContainer}>
-      <Text style={styles.progressText}>
-        Question {currentQuestionIndex + 1}/{quizData.length}
-      </Text>
-      <Text style={styles.question}>{currentQuestion.question}</Text>
-      <View
-        style={{
-          height: 6,
-          backgroundColor: "#727272",
-          marginBottom: 10,
-          borderRadius: 10,
-        }}
-      />
-      {currentQuestion.options.map((option, index) => (
-        <TouchableOpacity
-          key={index}
-          style={styles.option}
-          onPress={handleOptionPress}
-        >
-          <Text style={styles.optionText}>{option}</Text>
-        </TouchableOpacity>
-      ))}
+    <View style={styles.container}>
+      <View style={styles.questionContainer}>
+        <Text style={styles.progressText}>
+          Question {currentQuestionIndex + 1}/{quizData.length}
+        </Text>
+        <Text style={styles.question}>{currentQuestion.question}</Text>
+        <View
+          style={{
+            height: 6,
+            backgroundColor: "#727272",
+            marginBottom: 10,
+            borderRadius: 10,
+          }}
+        />
+        {currentQuestion.options.map((option, index) => (
+          <TouchableOpacity
+            key={index}
+            style={styles.option}
+            onPress={() => handleOptionPress(option)}
+          >
+            <Text style={styles.optionText}>{option}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
     </View>
   );
 };
@@ -47,6 +67,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
   },
   progressText: {
     fontSize: 16,
@@ -54,15 +76,8 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   questionContainer: {
-    marginTop: 100,
     padding: 50,
-    // backgroundColor: "#f9f9f9",
     borderRadius: 10,
-    // shadowColor: "#000",
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 0.1,
-    // shadowRadius: 5,
-    // elevation: 3,
     justifyContent: "center",
     alignContent: "center",
   },
@@ -92,6 +107,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#3d3d3d",
     fontWeight: "bold",
+  },
+  resultText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
   },
 });
 

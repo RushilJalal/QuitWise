@@ -14,7 +14,7 @@ const userProfile = {
   name: "Rushil Jalal",
   email: "rushiljalal@gmail.com",
   profilePicture: require("../assets/pfp.png"),
-  joinDate: "Joined in 2021",
+  joinDate: "Joined in 2024",
   bio: "Passionate about epigenetics and helping others recover from addiction.",
   location: "New York, USA",
   interests: ["Epigenetics", "Health", "Wellness", "Recovery"],
@@ -32,14 +32,6 @@ export default function UserProfile() {
       <Text style={styles.name}>{userProfile.name}</Text>
       <Text style={styles.email}>{userProfile.email}</Text>
       <Text style={styles.date}>{userProfile.joinDate}</Text>
-      <Text style={styles.interestsTitle}>Interests:</Text>
-      <View style={styles.interestsContainer}>
-        {userProfile.interests.map((interest, index) => (
-          <Text key={index} style={styles.interest}>
-            {interest}
-          </Text>
-        ))}
-      </View>
       <Text style={styles.title}>Overview:</Text>
       <View style={styles.overviewContainer}>
         <View style={styles.overview}>
@@ -47,16 +39,16 @@ export default function UserProfile() {
             style={{ width: 20, height: 28 }}
             source={require("../assets/alcohol top right.png")}
           />
-          <Text>Longest streak:</Text>
-          <Text>{longestStreak} days</Text>
+          <Text style={styles.overviewText}>Longest streak:</Text>
+          <Text style={styles.streakText}>{longestStreak} days</Text>
         </View>
         <View style={styles.overview}>
           <Image
             style={{ width: 25, height: 25 }}
             source={require("../assets/cigarette.png")}
           />
-          <Text>Longest streak:</Text>
-          <Text>{longestStreak} days</Text>
+          <Text style={styles.overviewText}>Longest streak:</Text>
+          <Text style={styles.streakText}>{longestStreak} days</Text>
         </View>
       </View>
       <ButtonLink
@@ -87,11 +79,10 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     alignItems: "center",
-    padding: 16,
   },
   profilePicture: {
-    width: 200,
-    height: 200,
+    width: 250,
+    height: 250,
     borderRadius: 75,
   },
   name: {
@@ -135,7 +126,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginVertical: 16,
-    textAlign: "left",
   },
   overviewContainer: {
     flexDirection: "row",
@@ -156,9 +146,19 @@ const styles = StyleSheet.create({
     elevation: 3,
     marginBottom: 16,
     gap: 8,
+    fontSize: 30,
   },
   profileButtons: {
     width: "100%",
     height: 100,
+  },
+  overviewText: {
+    fontWeight: "bold",
+    marginBottom: 8,
+    fontSize: 16,
+  },
+  streakText: {
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });

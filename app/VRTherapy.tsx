@@ -6,13 +6,12 @@ import {
   ViewStyle,
   TouchableOpacity,
   ImageBackground,
-  Text,
   ScrollView,
 } from "react-native";
 
 const YoutubeWebView: React.FC = () => {
   const [videoUrl, setVideoUrl] = useState(
-    "https://www.youtube.com/embed/p8NF8Ekw2xs"
+    "https://www.youtube.com/embed/JYwUS06-5Ho"
   );
 
   const handleButtonPress = (url: string) => {
@@ -25,13 +24,13 @@ const YoutubeWebView: React.FC = () => {
         <WebView
           style={styles.webview}
           javaScriptEnabled={true}
-          allowsFullscreenVideo={true} // Enable full-screen mode
-          source={{ uri: videoUrl }} // Use the state variable for the YouTube video URL
+          allowsFullscreenVideo={true}
+          source={{ uri: videoUrl }}
         />
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() =>
-              handleButtonPress("https://www.youtube.com/embed/p8NF8Ekw2xs")
+              handleButtonPress("https://www.youtube.com/embed/JYwUS06-5Ho")
             }
           >
             <ImageBackground
@@ -39,9 +38,10 @@ const YoutubeWebView: React.FC = () => {
               style={styles.button}
             ></ImageBackground>
           </TouchableOpacity>
+
           <TouchableOpacity
             onPress={() =>
-              handleButtonPress("https://www.youtube.com/embed/dQw4w9WgXcQ")
+              handleButtonPress("https://www.youtube.com/embed/XU58px3OGMo")
             }
           >
             <ImageBackground
@@ -49,6 +49,7 @@ const YoutubeWebView: React.FC = () => {
               style={styles.button}
             ></ImageBackground>
           </TouchableOpacity>
+
           <TouchableOpacity
             onPress={() =>
               handleButtonPress("https://www.youtube.com/embed/Q8JIO106JlM")
@@ -59,13 +60,25 @@ const YoutubeWebView: React.FC = () => {
               style={styles.button}
             ></ImageBackground>
           </TouchableOpacity>
+
           <TouchableOpacity
             onPress={() =>
-              handleButtonPress("https://www.youtube.com/embed/Q8JIO106JlM")
+              handleButtonPress("https://www.youtube.com/embed/uKvc9dUgykA")
             }
           >
             <ImageBackground
               source={require("../assets/vr therapy/relaxing music.png")}
+              style={styles.button}
+            ></ImageBackground>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() =>
+              handleButtonPress("https://www.youtube.com/embed/zhGUvZLO0KY")
+            }
+          >
+            <ImageBackground
+              source={require("../assets/vr therapy/singing bowls.png")}
               style={styles.button}
             ></ImageBackground>
           </TouchableOpacity>
@@ -75,7 +88,6 @@ const YoutubeWebView: React.FC = () => {
   );
 };
 
-// StyleSheet with proper typing
 const styles = StyleSheet.create({
   scrollViewContent: {
     flexGrow: 1,
