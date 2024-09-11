@@ -9,6 +9,9 @@ const HeaderRight = () => {
   const elapsedDrinkTime = useStore((state) => {
     return state.elapsedDrinkTime;
   });
+  const elapsedSmokeTime = useStore((state) => {
+    return state.elapsedSmokeTime;
+  });
 
   return (
     <View style={{ flexDirection: "row" }}>
@@ -67,7 +70,7 @@ const HeaderRight = () => {
                 fontWeight: "bold",
               }}
             >
-              17
+              {elapsedSmokeTime}
             </Text>
           </View>
         )}

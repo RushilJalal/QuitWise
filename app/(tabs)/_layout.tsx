@@ -62,7 +62,6 @@ export default function TabLayout() {
           title: "Home",
           headerTitleStyle: {
             color: "black",
-            // fontWeight: "bold",
           },
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => <HeaderRight />,

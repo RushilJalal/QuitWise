@@ -1,11 +1,11 @@
+import SmokingTracker from "@/components/SmokingTracker";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 const SmokingCessation: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Smoking Cessation</Text>
-      {/* Add your content here */}
+      <SmokingTracker />
     </View>
   );
 };

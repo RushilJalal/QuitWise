@@ -106,11 +106,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "column",
     justifyContent: "space-around",
-    marginTop: 20,
+    // marginTop: 20,
   },
   button: {
     width: 400,
-    height: 200,
+    height: 150,
     justifyContent: "center",
     alignItems: "center",
   },
