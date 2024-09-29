@@ -7,7 +7,10 @@ import {
   TouchableOpacity,
   ImageBackground,
   ScrollView,
+  Dimensions,
 } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 const YoutubeWebView: React.FC = () => {
   const [videoUrl, setVideoUrl] = useState(
@@ -99,14 +102,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   webview: {
-    width: 400,
+    width: width - 10,
     height: 300,
     marginTop: 30,
   },
   buttonContainer: {
     flexDirection: "column",
     justifyContent: "space-around",
-    // marginTop: 20,
   },
   button: {
     width: 400,

@@ -21,7 +21,7 @@ const userProfile = {
 };
 
 export default function UserProfile() {
-  const { longestStreak } = useStore();
+  const { longestStreak, longestSmokeStreak } = useStore();
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -48,7 +48,7 @@ export default function UserProfile() {
             source={require("../assets/cigarette.png")}
           />
           <Text style={styles.overviewText}>Longest streak:</Text>
-          <Text style={styles.streakText}>{longestStreak} days</Text>
+          <Text style={styles.streakText}>{longestSmokeStreak} days</Text>
         </View>
       </View>
       <ButtonLink
