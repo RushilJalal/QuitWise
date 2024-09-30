@@ -30,9 +30,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "main": "app/(tabs)/index.tsx",
-    "plugins": [
-      "expo-router"
-    ],
+    "plugins": ["expo-router"],
     "experiments": {
       "typedRoutes": true
     },

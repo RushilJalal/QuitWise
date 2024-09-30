@@ -16,6 +16,12 @@
     "preview4": {
       "distribution": "internal"
     },
-    "production": {}
+    "production": {},
+    "development": {
+      "android": {
+        "buildType": "apk"
+      },
+      "developmentClient": true
+    }
   }
 }
