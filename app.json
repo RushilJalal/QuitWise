@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "appathon-epigenetics",
-    "slug": "appathon-epigenetics",
+    "name": "QuitWise",
+    "slug": "quitwise",
     "entryPoint": "./app/(tabs)/index.tsx",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -30,9 +30,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "main": "app/(tabs)/index.tsx",
-    "plugins": [
-      "expo-router"
-    ],
+    "plugins": ["expo-router"],
     "experiments": {
       "typedRoutes": true
     },
