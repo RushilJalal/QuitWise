@@ -7,7 +7,7 @@ import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 import HeaderRight from "@/components/HeaderRight";
-import Index from "@/app/(tabs)";
+import Index from "@/app/(tabs)/index";
 import CallScreen from "@/app/(tabs)/CallScreen";
 import LeaderboardScreen from "@/app/(tabs)/LeaderboardScreen";
 import SettingsScreen from "@/app/(tabs)/SettingsScreen";

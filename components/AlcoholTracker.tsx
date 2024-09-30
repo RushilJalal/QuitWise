@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AnimatedCircularProgress } from "react-native-circular-progress";
+import Svg, { Circle } from "react-native-svg";
 import useStore from "../useStore";
 
 const AlcoholTracker = () => {
@@ -35,7 +35,7 @@ const AlcoholTracker = () => {
     loadLastDrinkTime();
   }, [setLastDrinkTime, setElapsedDrinkTime, setProgress]);
 
-  //loads the longest streak from storage and updates state
+  //updates elapsed time and progress every hour
   useEffect(() => {
     const interval = setInterval(() => {
       if (lastDrinkTime) {
@@ -93,23 +93,43 @@ const AlcoholTracker = () => {
     return progress >= 100 ? "purple" : "#14d9c5";
   };
 
+  const radius = 110;
+  const strokeWidth = 15;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (progress / 100) * circumference;
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Time since last drink:</Text>
-      <AnimatedCircularProgress
-        size={250}
-        width={15}
-        fill={progress}
-        tintColor={getTintColor(progress)}
-        backgroundColor="#727272"
+      <Svg
+        height="250"
+        width="250"
+        viewBox="0 0 250 250"
         style={styles.progress}
       >
-        {() => (
-          <Text style={styles.time}>
-            {elapsedDrinkTime} {elapsedDrinkTime === 1 ? "Day" : "Days"}
-          </Text>
-        )}
-      </AnimatedCircularProgress>
+        <Circle
+          cx="125"
+          cy="125"
+          r={radius}
+          stroke="#727272"
+          strokeWidth={strokeWidth}
+          fill="none"
+        />
+        <Circle
+          cx="125"
+          cy="125"
+          r={radius}
+          stroke={getTintColor(progress)}
+          strokeWidth={strokeWidth}
+          fill="none"
+          strokeDasharray={circumference}
+          strokeDashoffset={strokeDashoffset}
+          strokeLinecap="round"
+        />
+        <Text style={styles.time}>
+          {elapsedDrinkTime} {elapsedDrinkTime === 1 ? "Day" : "Days"}
+        </Text>
+      </Svg>
       <Text style={styles.longestStreak}>
         Longest Streak: {longestStreak} {longestStreak === 1 ? "Day" : "Days"}
       </Text>
@@ -138,6 +158,10 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: "#333",
     textAlign: "center",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: [{ translateX: -50 }, { translateY: 100 }],
   },
   progress: {
     marginBottom: 30,

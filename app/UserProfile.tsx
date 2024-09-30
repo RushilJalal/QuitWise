@@ -40,7 +40,9 @@ export default function UserProfile() {
             source={require("../assets/alcohol top right.png")}
           />
           <Text style={styles.overviewText}>Longest streak:</Text>
-          <Text style={styles.streakText}>{longestStreak} days</Text>
+          <Text style={styles.streakText}>
+            {longestStreak} {longestStreak === 1 ? "Day" : "Days"}
+          </Text>
         </View>
         <View style={styles.overview}>
           <Image
@@ -48,7 +50,9 @@ export default function UserProfile() {
             source={require("../assets/cigarette.png")}
           />
           <Text style={styles.overviewText}>Longest streak:</Text>
-          <Text style={styles.streakText}>{longestSmokeStreak} days</Text>
+          <Text style={styles.streakText}>
+            {longestSmokeStreak} {longestSmokeStreak === 1 ? "Day" : "Days"}
+          </Text>
         </View>
       </View>
       <ButtonLink
