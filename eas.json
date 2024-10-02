@@ -1,27 +1,47 @@
 {
   "build": {
     "preview": {
+      "distribution": "internal",
       "android": {
-        "buildType": "apk"
-      }
+        "buildType": "apk",
+        "channel": "preview"
+      },
+      "channel": "preview"
     },
     "preview2": {
       "android": {
-        "gradleCommand": ":app:assembleRelease"
-      }
+        "gradleCommand": ":app:assembleRelease",
+        "channel": "preview2"
+      },
+      "channel": "preview2"
     },
     "preview3": {
-      "developmentClient": true
+      "developmentClient": true,
+      "android": {
+        "channel": "preview3"
+      },
+      "channel": "preview3"
     },
     "preview4": {
-      "distribution": "internal"
-    },
-    "production": {},
-    "development": {
+      "distribution": "internal",
       "android": {
-        "buildType": "apk"
+        "channel": "preview4"
       },
-      "developmentClient": true
+      "channel": "preview4"
+    },
+    "production": {
+      "android": {
+        "channel": "production"
+      },
+      "channel": "production"
+    },
+    "development": {
+      "developmentClient": true,
+      "android": {
+        "buildType": "apk",
+        "channel": "development"
+      },
+      "channel": "development"
     }
   }
 }

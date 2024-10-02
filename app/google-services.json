@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "493211331890",
+    "project_id": "quitwise-d636a",
+    "storage_bucket": "quitwise-d636a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493211331890:android:1e1d318bfeaa821d9e3b2b",
+        "android_client_info": {
+          "package_name": "com.rushiljalal.appathonepigenetics"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR1TpTeEz5qW7HstZ5HB8CAOtNjt6H5VY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

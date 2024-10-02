@@ -12,6 +12,7 @@ import CallScreen from "@/app/(tabs)/CallScreen";
 import LeaderboardScreen from "@/app/(tabs)/LeaderboardScreen";
 import SettingsScreen from "@/app/(tabs)/SettingsScreen";
 
+
 const Tabs = createBottomTabNavigator();
 
 function TabBarIcon(props: {

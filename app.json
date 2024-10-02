@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "QuitWise",
-    "slug": "quitwise",
+    "slug": "appathon-epigenetics",
     "entryPoint": "./app/(tabs)/index.tsx",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,14 +15,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.rushiljalal.appathonepigenetics"
+      "bundleIdentifier": "com.rushiljalal.quitwise"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#000000"
       },
-      "package": "com.rushiljalal.appathonepigenetics"
+      "package": "com.rushiljalal.quitwise"
     },
     "web": {
       "bundler": "metro",
@@ -30,7 +30,17 @@
       "favicon": "./assets/images/favicon.png"
     },
     "main": "app/(tabs)/index.tsx",
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
     },
@@ -39,11 +49,11 @@
         "projectId": "796af64f-63e5-4543-a9d1-a9fd3a269d74"
       }
     },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
     "updates": {
       "url": "https://u.expo.dev/796af64f-63e5-4543-a9d1-a9fd3a269d74"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }
