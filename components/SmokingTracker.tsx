@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AnimatedCircularProgress } from "react-native-circular-progress";
 import useStore from "../useStore";
+import { Circle, Svg } from "react-native-svg";
 
 const SmokingTracker = () => {
   const {
@@ -93,23 +93,44 @@ const SmokingTracker = () => {
     return progress >= 100 ? "purple" : "#14d9c5";
   };
 
+  const radius = 110;
+  const strokeWidth = 15;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset =
+    circumference - (smokeProgress / 100) * circumference;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Time since last smoke:</Text>
-      <AnimatedCircularProgress
-        size={250}
-        width={15}
-        fill={smokeProgress}
-        tintColor={getTintColor(smokeProgress)}
-        backgroundColor="#727272"
+      <Text style={styles.label}>Time since last drink:</Text>
+      <Svg
+        height="250"
+        width="250"
+        viewBox="0 0 250 250"
         style={styles.progress}
       >
-        {() => (
-          <Text style={styles.time}>
-            {elapsedSmokeTime} {elapsedSmokeTime === 1 ? "Day" : "Days"}
-          </Text>
-        )}
-      </AnimatedCircularProgress>
+        <Circle
+          cx="125"
+          cy="125"
+          r={radius}
+          stroke="#727272"
+          strokeWidth={strokeWidth}
+          fill="none"
+        />
+        <Circle
+          cx="125"
+          cy="125"
+          r={radius}
+          stroke={getTintColor(smokeProgress)}
+          strokeWidth={strokeWidth}
+          fill="none"
+          strokeDasharray={circumference}
+          strokeDashoffset={strokeDashoffset}
+          strokeLinecap="round"
+        />
+        <Text style={styles.time}>
+          {elapsedSmokeTime} {elapsedSmokeTime === 1 ? "Day" : "Days"}
+        </Text>
+      </Svg>
       <Text style={styles.longestStreak}>
         Longest Streak: {longestSmokeStreak}{" "}
         {longestSmokeStreak === 1 ? "Day" : "Days"}
@@ -139,6 +160,10 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: "#333",
     textAlign: "center",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: [{ translateX: -50 }, { translateY: 100 }],
   },
   progress: {
     marginBottom: 30,
