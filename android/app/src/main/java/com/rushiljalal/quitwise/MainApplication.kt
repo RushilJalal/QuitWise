@@ -1,4 +1,4 @@
-package com.rushiljalal.appathonepigenetics
+package com.rushiljalal.quitwise
 
 import android.app.Application
 import android.content.res.Configuration
