@@ -15,7 +15,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.rushiljalal.quitwise"
+      "bundleIdentifier": "com.rushiljalal.`quitwise`"
     },
     "android": {
       "adaptiveIcon": {

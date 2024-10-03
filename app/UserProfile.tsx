@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     alignItems: "center",
+    backgroundColor: "#fff",
   },
   profilePicture: {
     width: 200,
