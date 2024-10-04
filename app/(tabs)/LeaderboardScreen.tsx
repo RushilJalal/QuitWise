@@ -1,14 +1,22 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import EditScreenInfo from "@/components/EditScreenInfo";
-import { Text, View } from "@/components/Themed";
 
 const LeaderboardScreen: React.FC = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <EditScreenInfo path="/app/tabs/leaderboard.tsx" />
+      <Text>Hello</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 
 export default LeaderboardScreen;
