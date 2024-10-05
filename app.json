@@ -24,7 +24,8 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.rushiljalal.quitwise",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "permissions": ["INTERNET"]
     },
     "web": {
       "bundler": "metro",
@@ -43,7 +44,8 @@
         }
       ],
       "@react-native-firebase/app",
-      "@react-native-firebase/auth"
+      "@react-native-firebase/auth",
+      "@react-native-google-signin/google-signin"
     ],
     "experiments": {
       "typedRoutes": true

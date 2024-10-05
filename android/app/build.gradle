@@ -200,4 +200,10 @@ if (rnVersion < versionToNumber(0, 75, 0)) {
     applyNativeModulesAppBuildGradle(project)
 }
 
+apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+
+dependencies {
+  implementation 'com.google.firebase:firebase-auth:21.0.1'
+  implementation 'com.google.firebase:firebase-storage:20.0.0'
+}
