@@ -41,7 +41,10 @@
         "buildType": "apk",
         "channel": "development"
       },
-      "channel": "development"
+      "channel": "development",
+      "env": {
+        "EXPO_PUBLIC_FIREBASE_API_KEY": "AIzaSyC2KODZj1gf-0zVcUGmJF4b1zOCJW5V1Yo"
+      }
     }
   }
 }

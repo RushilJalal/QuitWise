@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.EXPO_FIREBASE_API_KEY,
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
   authDomain: "quitwise-f5754.firebaseapp.com",
   projectId: "quitwise-f5754",
   storageBucket: "quitwise-f5754.appspot.com",

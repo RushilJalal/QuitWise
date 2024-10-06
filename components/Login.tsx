@@ -1,7 +1,6 @@
-// src/Login.tsx
 import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet, Text } from "react-native";
-import { signIn } from "./authService";
+import { signIn } from "../authService";
 
 const Login = ({ onLogin }: { onLogin: () => void }) => {
   const [email, setEmail] = useState("");

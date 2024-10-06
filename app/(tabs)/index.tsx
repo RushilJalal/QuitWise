@@ -5,44 +5,43 @@ import { StatusBar } from "expo-status-bar";
 import useStore from "../../useStore";
 import { saveStreaks } from "../../firestoreService";
 import { getCurrentUser } from "../../authService";
-import Login from "../../Login";
+import Login from "../../components/Login";
 import ButtonLink from "../../components/ButtonLink";
 import ButtonContainer from "../../components/ButtonContainer";
 
 const Index = () => {
-  const { longestStreak, longestSmokeStreak } = useStore();
-  const [userId, setUserId] = useState<string | null>(null);
+  // const { longestStreak, longestSmokeStreak } = useStore();
+  // const [userId, setUserId] = useState<string | null>(null);
 
-  useEffect(() => {
-    getCurrentUser()
-      .then((user: any) => {
-        setUserId(user.uid);
-      })
-      .catch((error) => {
-        console.error("Error getting current user: ", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   getCurrentUser()
+  //     .then((user: any) => {
+  //       setUserId(user.uid);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error getting current user: ", error);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    if (userId) {
-      const interval = setInterval(() => {
-        saveStreaks(userId, longestStreak, longestSmokeStreak);
-      }, 5000);
+  // useEffect(() => {
+  //   if (userId) {
+  //     const interval = setInterval(() => {
+  //       saveStreaks(userId, longestStreak, longestSmokeStreak);
+  //     }, 5000);
 
-      return () => clearInterval(interval);
-    }
-  }, [userId, longestStreak, longestSmokeStreak]);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [userId, longestStreak, longestSmokeStreak]);
 
-  if (!userId) {
-    return (
-      <Login
-        onLogin={() =>
-          getCurrentUser().then((user: any) => setUserId(user.uid))
-        }
-      />
-    );
-  }
-
+  // if (!userId) {
+  //   return (
+  //     <Login
+  //       onLogin={() =>
+  //         getCurrentUser().then((user: any) => setUserId(user.uid))
+  //       }
+  //     />
+  //   );
+  // }
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
