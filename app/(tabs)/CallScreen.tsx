@@ -9,8 +9,10 @@ import {
 import { Text, View } from "@/components/Themed";
 
 export default function CallScreen() {
-  const handleCallPress = () => {
-    Linking.openURL("tel:9560676967");
+  // pass phone number into function
+
+  const handleCallPress = (phone: string) => {
+    Linking.openURL(`tel:${phone}`);
   };
 
   const handleEmailPress = () => {
@@ -20,43 +22,54 @@ export default function CallScreen() {
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.container}>
-        <TouchableOpacity style={styles.mainbutton} onPress={handleCallPress}>
+        <TouchableOpacity
+          style={styles.mainbutton}
+          onPress={() => {
+            handleCallPress("1800-599-0019");
+          }}
+        >
+          <Image
+            source={require("../../assets/state_emblem.png")}
+            style={styles.buttonImage}
+          />
+          <View style={styles.textContainer}>
+            <Text style={styles.buttonText}>National Helpline</Text>
+            <Text style={styles.phone}>1800-599-0019</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.mainbutton}
+          onPress={() => {
+            handleCallPress("+91 8202922761");
+          }}
+        >
           <Image
             source={require("../../assets/mahe.jpeg")}
             style={styles.mainButtonImage}
           />
           <View style={styles.textContainer}>
-            <Text style={styles.buttonText}>Department Name</Text>
-            <Text style={styles.phone}>+91 95606 76967</Text>
+            <Text style={styles.buttonText}>
+              Department of {"\n"}Emergency Medicine
+            </Text>
+            <Text style={styles.phone}>+91 8202922761</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleEmailPress}>
+        <TouchableOpacity
+          style={styles.mainbutton}
+          onPress={() => {
+            handleCallPress("+91 8202922217");
+          }}
+        >
           <Image
-            source={require("../../assets/pfp.png")}
-            style={styles.buttonImage}
+            source={require("../../assets/mahe.jpeg")}
+            style={styles.mainButtonImage}
           />
-          <Text style={styles.buttonText}>Email example@example.com</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleEmailPress}>
-          <Image
-            source={require("../../assets/pfp.png")}
-            style={styles.buttonImage}
-          />
-          <Text style={styles.buttonText}>Email example@example.com</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleEmailPress}>
-          <Image
-            source={require("../../assets/pfp.png")}
-            style={styles.buttonImage}
-          />
-          <Text style={styles.buttonText}>Email example@example.com</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleEmailPress}>
-          <Image
-            source={require("../../assets/pfp.png")}
-            style={styles.buttonImage}
-          />
-          <Text style={styles.buttonText}>Email example@example.com</Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.buttonText}>
+              Department of {"\n"}Psychiatry
+            </Text>
+            <Text style={styles.phone}>+91 8202922217</Text>
+          </View>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -72,7 +85,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
     padding: 30,
   },
   button: {
@@ -120,14 +132,15 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderColor: "#14d9c5",
     borderWidth: 5,
+    width: 360,
   },
   textContainer: {
     display: "flex",
     flexDirection: "column",
   },
-  phone:{
+  phone: {
     fontSize: 15,
     color: "#3d3d3d",
     marginTop: 5,
-  }
+  },
 });

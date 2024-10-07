@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import { auth, db } from "./config/firebaseConfig";
+import { doc, updateDoc } from "firebase/firestore";
 
 interface StoreState {
   lastDrinkTime: Date | null;
@@ -20,9 +22,11 @@ interface StoreState {
   setElapsedSmokeTime: (time: number) => void;
   setSmokeProgress: (progress: number) => void;
   setLongestSmokeStreak: (streak: number) => void;
+
+  // saveStreaksToFirestore: () => Promise<void>;
 }
 
-const useStore = create<StoreState>((set) => ({
+const useStore = create<StoreState>((set, get) => ({
   lastDrinkTime: null,
   elapsedDrinkTime: 0,
   progress: 0,
@@ -43,6 +47,23 @@ const useStore = create<StoreState>((set) => ({
   setSmokeProgress: (progress: number) => set({ smokeProgress: progress }),
   setLongestSmokeStreak: (streak: number) =>
     set({ longestSmokeStreak: streak }),
+
+  // saveStreaksToFirestore: async () => {
+  //   const { longestStreak, longestSmokeStreak } = get();
+  //   const user = auth.currentUser;
+  //   if (user) {
+  //     const userRef = doc(db, "users", user.uid);
+  //     try {
+  //       await updateDoc(userRef, {
+  //         longestStreak,
+  //         longestSmokeStreak,
+  //       });
+  //       console.log("Streaks updated successfully");
+  //     } catch (error) {
+  //       console.error("Error updating streaks:", error);
+  //     }
+  //   }
+  // },
 }));
 
 export default useStore;

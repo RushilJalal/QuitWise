@@ -1,11 +1,11 @@
 // src/index.tsx
-import React, { useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import useStore from "../../useStore";
-import { saveStreaks } from "../../firestoreService";
-import { getCurrentUser } from "../../authService";
-import Login from "../../components/Login";
+// import { saveStreaks } from "../../firestoreService";
+// import { getCurrentUser } from "../../authService";
+// import Login from "../../components/Login";
 import ButtonLink from "../../components/ButtonLink";
 import ButtonContainer from "../../components/ButtonContainer";
 
@@ -40,6 +40,33 @@ const Index = () => {
   //         getCurrentUser().then((user: any) => setUserId(user.uid))
   //       }
   //     />
+  //   );
+  // }
+  // const { user, loading } = useContext(AuthContext);
+  // const saveStreaksToFirestore = useStore(
+  //   (state) => state.saveStreaksToFirestore
+  // );
+
+  // useEffect(() => {
+  //   let interval: NodeJS.Timeout;
+
+  //   if (user) {
+  //     // Save streaks every 20 seconds
+  //     interval = setInterval(() => {
+  //       saveStreaksToFirestore();
+  //     }, 20000);
+  //   }
+
+  //   return () => {
+  //     if (interval) clearInterval(interval);
+  //   };
+  // }, [user, saveStreaksToFirestore]);
+
+  // if (loading) {
+  //   return (
+  //     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+  //       <ActivityIndicator size="large" color="#14d9c5" />
+  //     </View>
   //   );
   // }
   return (

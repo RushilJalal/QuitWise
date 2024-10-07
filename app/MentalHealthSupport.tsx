@@ -10,7 +10,7 @@ const MentalHealthSupport: React.FC = () => {
         Join our Discord server to connect with others in your community
       </Text>
       <ButtonLink
-        href="https://discord.gg/hUhn2BGm"
+        href="https://discord.gg/VsQvqbMWWS"
         imageSource={require("../assets/join_community.jpg")}
         style={styles.img}
       />

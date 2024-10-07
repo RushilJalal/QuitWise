@@ -15,8 +15,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.rushiljalal.quitwise",
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "bundleIdentifier": "com.rushiljalal.quitwise"
     },
     "android": {
       "adaptiveIcon": {
@@ -24,7 +23,6 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.rushiljalal.quitwise",
-      "googleServicesFile": "./google-services.json",
       "permissions": ["INTERNET"]
     },
     "web": {
@@ -34,17 +32,7 @@
     },
     "main": "app/(tabs)/index.tsx",
     "plugins": [
-      "expo-router",
-      [
-        "expo-build-properties",
-        {
-          "ios": {
-            "useFrameworks": "static"
-          }
-        }
-      ],
-      "@react-native-firebase/app",
-      "@react-native-firebase/auth"
+      "expo-router"
     ],
     "experiments": {
       "typedRoutes": true

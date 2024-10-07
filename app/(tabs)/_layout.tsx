@@ -11,9 +11,7 @@ import Index from "@/app/(tabs)/index";
 import CallScreen from "@/app/(tabs)/CallScreen";
 import LeaderboardScreen from "@/app/(tabs)/LeaderboardScreen";
 import SettingsScreen from "@/app/(tabs)/SettingsScreen";
-import { getCurrentUser } from "@/authService";
-import { saveStreaks } from "@/firestoreService";
-import Login from "../../components/Login";
+
 import useStore from "@/useStore";
 
 const Tabs = createBottomTabNavigator();
@@ -27,40 +25,7 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-
-  const { longestStreak, longestSmokeStreak } = useStore();
-  const [userId, setUserId] = useState<string | null>(null);
-
-  useEffect(() => {
-    getCurrentUser()
-      .then((user: any) => {
-        setUserId(user.uid);
-      })
-      .catch((error) => {
-        console.error("Error getting current user: ", error);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (userId) {
-      const interval = setInterval(() => {
-        saveStreaks(userId, longestStreak, longestSmokeStreak);
-      }, 5000);
-
-      return () => clearInterval(interval);
-    }
-  }, [userId, longestStreak, longestSmokeStreak]);
-
-  if (!userId) {
-    return (
-      <Login
-        onLogin={() =>
-          getCurrentUser().then((user: any) => setUserId(user.uid))
-        }
-      />
-    );
-  }
-
+  
   return (
     <Tabs.Navigator
       initialRouteName="Home"

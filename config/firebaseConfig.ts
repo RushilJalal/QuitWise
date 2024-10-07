@@ -1,17 +1,21 @@
-// src/firebase/firebaseConfig.ts
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  apiKey: "AIzaSyBdG5XXwXOYLQ76c_oDEBFpooY2n7f0cC4",
   authDomain: "quitwise-f5754.firebaseapp.com",
   projectId: "quitwise-f5754",
   storageBucket: "quitwise-f5754.appspot.com",
   messagingSenderId: "402803108866",
-  appId: "1:402803108866:android:2dbcb7b0d051943c57cb1b",
+  appId: "1:402803108866:web:eae668efe094748957cb1b",
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);

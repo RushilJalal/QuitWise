@@ -27,8 +27,6 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="myapp"/>
-        <data android:scheme="com.rushiljalal.appathonepigenetics"/>
-        <data android:scheme="exp+quitwise"/>
         <data android:scheme="com.rushiljalal.quitwise"/>
         <data android:scheme="exp+appathon-epigenetics"/>
       </intent-filter>
