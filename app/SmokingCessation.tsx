@@ -1,26 +1,33 @@
+import ButtonLink from "@/components/ButtonLink";
 import SmokingTracker from "@/components/SmokingTracker";
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { ScrollView, View, Text, StyleSheet } from "react-native";
 
 const SmokingCessation: React.FC = () => {
   return (
     <View style={styles.container}>
       <SmokingTracker />
+      <ButtonLink
+        href="/SmokingQuiz"
+        imageSource={require("../assets/questionnaire/smoke.png")}
+        style={styles.img}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
+    padding: 16,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 16,
+  img: {
+    width: 400,
+    height: 200,
+    borderRadius: 5,
   },
 });
 

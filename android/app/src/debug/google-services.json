@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "402803108866",
+    "project_id": "quitwise-f5754",
+    "storage_bucket": "quitwise-f5754.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402803108866:android:2dbcb7b0d051943c57cb1b",
+        "android_client_info": {
+          "package_name": "com.rushiljalal.quitwise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "402803108866-de67ial5a7cqhc1q0b7djos5o8lprq6u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rushiljalal.quitwise",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "402803108866-o1gdq22j44ka0lav0p6d6qnl5pl2mq3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2KODZj1gf-0zVcUGmJF4b1zOCJW5V1Yo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "402803108866-o1gdq22j44ka0lav0p6d6qnl5pl2mq3f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
