@@ -12,6 +12,7 @@ interface ButtonLinkProps {
   href: string;
   imageSource: any;
   style?: ViewStyle | ImageStyle;
+  onPress?: () => void;
 }
 
 const ButtonLink: React.FC<ButtonLinkProps> = ({

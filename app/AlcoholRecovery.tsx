@@ -1,7 +1,6 @@
 import AlcoholTracker from "@/components/AlcoholTracker";
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import AlcoholQuiz from "./AlcoholQuiz";
+import { View, StyleSheet } from "react-native";
 import ButtonLink from "@/components/ButtonLink";
 
 const AlcoholRecovery: React.FC = () => {
@@ -33,6 +32,7 @@ const styles = StyleSheet.create({
     width: 400,
     height: 200,
     borderRadius: 5,
+    marginBottom: 100,
   },
 });
 

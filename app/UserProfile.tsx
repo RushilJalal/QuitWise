@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   Image,
   ScrollView,
-  Button,
+  TouchableOpacity,
+  TextInput,
 } from "react-native";
 import useStore from "../useStore";
 import ButtonLink from "@/components/ButtonLink";
+import Modal from "react-native-modal";
 
 const userProfile = {
   name: "Rushil Jalal",
@@ -16,12 +18,21 @@ const userProfile = {
   profilePicture: require("../assets/avatars/whiteman.png"),
   joinDate: "Joined in 2024",
   bio: "Passionate about epigenetics and helping others recover from addiction.",
-  location: "New York, USA",
   interests: ["Epigenetics", "Health", "Wellness", "Recovery"],
 };
 
 export default function UserProfile() {
   const { longestStreak, longestSmokeStreak } = useStore();
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [dailyConsumption, setDailyConsumption] = useState("");
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  const handleInputChange = (value: string) => {
+    setDailyConsumption(value);
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -56,10 +67,26 @@ export default function UserProfile() {
         </View>
       </View>
       <ButtonLink
-        href=""
+        href="/UserProfile"
         imageSource={require("../assets/daily consumption.png")}
         style={styles.profileButtons}
+        onPress={toggleModal}
       />
+      <Modal isVisible={isModalVisible}>
+        <View style={styles.modalContent}>
+          <Text style={styles.modalTitle}>Enter Daily Consumption</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            value={dailyConsumption}
+            onChangeText={handleInputChange}
+            placeholder="Enter a number"
+          />
+          <TouchableOpacity style={styles.closeButton} onPress={toggleModal}>
+            <Text style={styles.closeButtonText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
       <ButtonLink
         href=""
         imageSource={require("../assets/change username.png")}
@@ -165,6 +192,37 @@ const styles = StyleSheet.create({
   },
   streakText: {
     fontSize: 24,
+    fontWeight: "bold",
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 22,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+    borderColor: "rgba(0, 0, 0, 0.1)",
+  },
+  modalTitle: {
+    fontSize: 20,
+    marginBottom: 12,
+  },
+  input: {
+    width: "80%",
+    height: 40,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginBottom: 16,
+  },
+  closeButton: {
+    backgroundColor: "#007BFF",
+    padding: 10,
+    borderRadius: 5,
+  },
+  closeButtonText: {
+    color: "#fff",
+    fontSize: 16,
     fontWeight: "bold",
   },
 });

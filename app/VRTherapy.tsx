@@ -3,7 +3,6 @@ import { WebView } from "react-native-webview";
 import {
   View,
   StyleSheet,
-  ViewStyle,
   TouchableOpacity,
   ImageBackground,
   ScrollView,
@@ -82,6 +81,45 @@ const YoutubeWebView: React.FC = () => {
           >
             <ImageBackground
               source={require("../assets/vr therapy/singing bowls.png")}
+              style={styles.button}
+            ></ImageBackground>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() =>
+              handleButtonPress(
+                "https://www.youtube.com/embed/hNFbO8Kmrbc?si=N--5wUN9cxTr-ENw"
+              )
+            }
+          >
+            <ImageBackground
+              source={require("../assets/360/360 forest hike.png")}
+              style={styles.button}
+            ></ImageBackground>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() =>
+              handleButtonPress(
+                "https://www.youtube.com/embed/2OzlksZBTiA?si=TAT2XTFBcio1wjkM"
+              )
+            }
+          >
+            <ImageBackground
+              source={require("../assets/360/underwater 360.png")}
+              style={styles.button}
+            ></ImageBackground>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() =>
+              handleButtonPress(
+                "https://www.youtube.com/embed/dpwsDMkab_o?si=QlswBPr0W9HHDIw3"
+              )
+            }
+          >
+            <ImageBackground
+              source={require("../assets/360/around the world.png")}
               style={styles.button}
             ></ImageBackground>
           </TouchableOpacity>

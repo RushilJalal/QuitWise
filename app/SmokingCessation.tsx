@@ -1,7 +1,7 @@
 import ButtonLink from "@/components/ButtonLink";
 import SmokingTracker from "@/components/SmokingTracker";
 import React from "react";
-import { ScrollView, View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 const SmokingCessation: React.FC = () => {
   return (
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     width: 400,
     height: 200,
     borderRadius: 5,
+    marginBottom: 100,
   },
 });
 

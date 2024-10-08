@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Button,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 
 const questions = [
   {

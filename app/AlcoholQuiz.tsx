@@ -342,7 +342,6 @@ const styles = StyleSheet.create({
   questionText: {
     fontSize: 18,
     marginBottom: 20,
-    // fontWeight: "bold",
   },
 });
 
