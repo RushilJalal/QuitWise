@@ -7,6 +7,8 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Button,
+  ImageBackground,
 } from "react-native";
 import useStore from "../useStore";
 import ButtonLink from "@/components/ButtonLink";
@@ -19,26 +21,71 @@ const userProfile = {
   joinDate: "Joined in 2024",
 };
 
+const availableImages = [
+  require("../assets/avatars/whiteman.png"),
+  require("../assets/avatars/blackman.png"),
+  require("../assets/avatars/whiteturban.png"),
+  require("../assets/avatars/blackturban.png"),
+  require("../assets/avatars/blackbraid1.png"),
+];
+
 export default function UserProfile() {
   const { longestStreak, longestSmokeStreak } = useStore();
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isDailyConsumptionModalVisible, setDailyConsumptionModalVisible] =
+    useState(false);
+  const [isUsernameModalVisible, setUsernameModalVisible] = useState(false);
+  const [isProfilePictureModalVisible, setProfilePictureModalVisible] =
+    useState(false);
   const [dailyConsumption, setDailyConsumption] = useState("");
+  const [username, setUsername] = useState(userProfile.name);
+  const [profilePicture, setProfilePicture] = useState(
+    userProfile.profilePicture
+  );
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
+  const toggleDailyConsumptionModal = () => {
+    setDailyConsumptionModalVisible(!isDailyConsumptionModalVisible);
   };
 
-  const handleInputChange = (value: string) => {
+  const toggleUsernameModal = () => {
+    setUsernameModalVisible(!isUsernameModalVisible);
+  };
+
+  const toggleProfilePictureModal = () => {
+    setProfilePictureModalVisible(!isProfilePictureModalVisible);
+  };
+
+  const handleDailyConsumptionChange = (value: string) => {
     setDailyConsumption(value);
+  };
+
+  const handleUsernameChange = (value: string) => {
+    setUsername(value);
+  };
+
+  const handleProfilePictureChange = (image: any) => {
+    setProfilePicture(image);
+    setProfilePictureModalVisible(false);
+  };
+
+  const saveUsername = () => {
+    // Save the new username to the user profile or backend
+    userProfile.name = username;
+    toggleUsernameModal();
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image
-        source={userProfile.profilePicture}
-        style={styles.profilePicture}
-      />
-      <Text style={styles.name}>{userProfile.name}</Text>
+      <Image source={profilePicture} style={styles.profilePicture} />
+      <TouchableOpacity onPress={toggleProfilePictureModal}>
+        {/* <ImageBackground
+          source={require("../assets/change username.png")}
+          style={styles.overview}
+          imageStyle={styles.buttonImage}
+        >
+        </ImageBackground> */}
+        <Text style={styles.changepfp}>Change Profile Picture</Text>
+      </TouchableOpacity>
+      <Text style={styles.name}>{username}</Text>
       <Text style={styles.email}>{userProfile.email}</Text>
       <Text style={styles.date}>{userProfile.joinDate}</Text>
       <Text style={styles.title}>Overview:</Text>
@@ -68,19 +115,22 @@ export default function UserProfile() {
         href="/UserProfile"
         imageSource={require("../assets/daily consumption.png")}
         style={styles.profileButtons}
-        onPress={toggleModal}
+        onPress={toggleDailyConsumptionModal}
       />
-      <Modal isVisible={isModalVisible}>
+      <Modal isVisible={isDailyConsumptionModalVisible}>
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>Enter Daily Consumption</Text>
           <TextInput
             style={styles.input}
             keyboardType="numeric"
             value={dailyConsumption}
-            onChangeText={handleInputChange}
+            onChangeText={handleDailyConsumptionChange}
             placeholder="Enter a number"
           />
-          <TouchableOpacity style={styles.closeButton} onPress={toggleModal}>
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={toggleDailyConsumptionModal}
+          >
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
         </View>
@@ -89,7 +139,28 @@ export default function UserProfile() {
         href=""
         imageSource={require("../assets/change username.png")}
         style={styles.profileButtons}
+        onPress={toggleUsernameModal}
       />
+      <Modal isVisible={isUsernameModalVisible}>
+        <View style={styles.modalContent}>
+          <Text style={styles.modalTitle}>Change Username</Text>
+          <TextInput
+            style={styles.input}
+            value={username}
+            onChangeText={handleUsernameChange}
+            placeholder="Enter new username"
+          />
+          <TouchableOpacity style={styles.saveButton} onPress={saveUsername}>
+            <Text style={styles.saveButtonText}>Save</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={toggleUsernameModal}
+          >
+            <Text style={styles.closeButtonText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
       <ButtonLink
         href=""
         imageSource={require("../assets/change password.png")}
@@ -100,6 +171,21 @@ export default function UserProfile() {
         imageSource={require("../assets/sign out.png")}
         style={styles.profileButtons}
       />
+      <Modal isVisible={isProfilePictureModalVisible}>
+        <View style={styles.modalContent}>
+          <ScrollView contentContainerStyle={styles.imageList}>
+            {availableImages.map((image, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleProfilePictureChange(image)}
+              >
+                <Image source={image} style={styles.imageOption} />
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+          <Button title="Close" onPress={toggleProfilePictureModal} />
+        </View>
+      </Modal>
     </ScrollView>
   );
 }
@@ -213,6 +299,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 16,
   },
+  saveButton: {
+    backgroundColor: "#28a745",
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  saveButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
   closeButton: {
     backgroundColor: "#007BFF",
     padding: 10,
@@ -222,5 +319,21 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  imageList: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
+  imageOption: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    margin: 8,
+  },
+  changepfp: {
+    fontSize: 16,
+    color: "#007BFF",
+    marginBottom: 16,
   },
 });

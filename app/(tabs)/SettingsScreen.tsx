@@ -103,15 +103,6 @@ const SettingsScreen: React.FC = () => {
         <Switch value={dailyLimit} onValueChange={setDailyLimit} />
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.settingItem}
-        onPress={() => setDailyInfo(!dailyInfo)}
-        activeOpacity={1}
-      >
-        <Text style={styles.label}>Daily Info</Text>
-        <Switch value={dailyInfo} onValueChange={setDailyInfo} />
-      </TouchableOpacity>
-
       <View style={styles.buttonContainer}>
         <Button title="Contact Us" onPress={handleContactUs} />
       </View>
