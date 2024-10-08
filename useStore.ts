@@ -12,6 +12,7 @@ interface StoreState {
   longestSmokeStreak: number;
 
   dailyConsumption: number;
+  drinkWeeklyConsumption: number;
   moneySaved: number; // Add moneySaved to the interface
 
   setLastDrinkTime: (time: Date) => void;
@@ -38,6 +39,7 @@ const useStore = create<StoreState>((set) => ({
   longestSmokeStreak: 0,
 
   dailyConsumption: 10,
+  drinkWeeklyConsumption: 5,
   moneySaved: 0, // Initialize moneySaved
 
   setLastDrinkTime: (time) => set({ lastDrinkTime: time }),

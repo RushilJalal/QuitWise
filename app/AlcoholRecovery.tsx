@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
+    marginTop: 30,
   },
   title: {
     fontSize: 24,
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     width: 400,
     height: 200,
     borderRadius: 5,
-    marginBottom: 100,
+    marginBottom: 80,
   },
 });
 

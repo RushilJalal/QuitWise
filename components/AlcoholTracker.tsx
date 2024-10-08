@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Svg, { Circle } from "react-native-svg";
 import useStore from "../useStore";
-
+let days: number;
 const AlcoholTracker = () => {
   const {
     lastDrinkTime,
@@ -52,7 +52,7 @@ const AlcoholTracker = () => {
     if (lastDrinkTime) {
       const now = new Date();
       const elapsed = now.getTime() - lastDrinkTime.getTime();
-      const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+      days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
       if (days > longestStreak) {
         setLongestStreak(days);
         try {
@@ -131,6 +131,9 @@ const AlcoholTracker = () => {
         </Text>
       </Svg>
       <Text style={styles.longestStreak}>
+        Money Saved: Rs. {Math.floor(days / 7) * 46 * 7}{" "}
+      </Text>
+      <Text style={styles.longestStreak}>
         Longest Streak: {longestStreak} {longestStreak === 1 ? "Day" : "Days"}
       </Text>
       <TouchableOpacity style={styles.button} onPress={updateLastDrinkTime}>
@@ -146,6 +149,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+    // marginTop: 30,
   },
   label: {
     fontSize: 22,
