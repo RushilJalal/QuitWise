@@ -4,12 +4,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import useStore from "../useStore";
 import { Circle, Svg } from "react-native-svg";
 
+let days: number = 0;
+
 const SmokingTracker = () => {
   const {
     lastSmokeTime,
     elapsedSmokeTime,
     smokeProgress,
     longestSmokeStreak,
+    dailyConsumption,
     setLastSmokeTime,
     setElapsedSmokeTime,
     setSmokeProgress,
@@ -52,7 +55,7 @@ const SmokingTracker = () => {
     if (lastSmokeTime) {
       const now = new Date();
       const elapsed = now.getTime() - lastSmokeTime.getTime();
-      const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+      days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
       if (days > longestSmokeStreak) {
         setLongestSmokeStreak(days);
         try {
@@ -131,6 +134,9 @@ const SmokingTracker = () => {
           {elapsedSmokeTime} {elapsedSmokeTime === 1 ? "Day" : "Days"}
         </Text>
       </Svg>
+      <Text style={styles.longestStreak}>
+        Money Saved: Rs. {longestSmokeStreak * 20 * dailyConsumption}{" "}
+      </Text>
       <Text style={styles.longestStreak}>
         Longest Streak: {longestSmokeStreak}{" "}
         {longestSmokeStreak === 1 ? "Day" : "Days"}

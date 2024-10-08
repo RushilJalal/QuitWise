@@ -1,6 +1,4 @@
 import { create } from "zustand";
-import { auth, db } from "./config/firebaseConfig";
-import { doc, updateDoc } from "firebase/firestore";
 
 interface StoreState {
   lastDrinkTime: Date | null;
@@ -13,6 +11,9 @@ interface StoreState {
   smokeProgress: number;
   longestSmokeStreak: number;
 
+  dailyConsumption: number;
+  moneySaved: number; // Add moneySaved to the interface
+
   setLastDrinkTime: (time: Date) => void;
   setElapsedDrinkTime: (time: number) => void;
   setProgress: (progress: number) => void;
@@ -22,11 +23,10 @@ interface StoreState {
   setElapsedSmokeTime: (time: number) => void;
   setSmokeProgress: (progress: number) => void;
   setLongestSmokeStreak: (streak: number) => void;
-
-  // saveStreaksToFirestore: () => Promise<void>;
+  setMoneySaved: (saved: number) => void; // Add setMoneySaved to the interface
 }
 
-const useStore = create<StoreState>((set, get) => ({
+const useStore = create<StoreState>((set) => ({
   lastDrinkTime: null,
   elapsedDrinkTime: 0,
   progress: 0,
@@ -36,6 +36,9 @@ const useStore = create<StoreState>((set, get) => ({
   elapsedSmokeTime: 0,
   smokeProgress: 0,
   longestSmokeStreak: 0,
+
+  dailyConsumption: 10,
+  moneySaved: 0, // Initialize moneySaved
 
   setLastDrinkTime: (time) => set({ lastDrinkTime: time }),
   setElapsedDrinkTime: (time) => set({ elapsedDrinkTime: time }),
@@ -47,23 +50,7 @@ const useStore = create<StoreState>((set, get) => ({
   setSmokeProgress: (progress: number) => set({ smokeProgress: progress }),
   setLongestSmokeStreak: (streak: number) =>
     set({ longestSmokeStreak: streak }),
-
-  // saveStreaksToFirestore: async () => {
-  //   const { longestStreak, longestSmokeStreak } = get();
-  //   const user = auth.currentUser;
-  //   if (user) {
-  //     const userRef = doc(db, "users", user.uid);
-  //     try {
-  //       await updateDoc(userRef, {
-  //         longestStreak,
-  //         longestSmokeStreak,
-  //       });
-  //       console.log("Streaks updated successfully");
-  //     } catch (error) {
-  //       console.error("Error updating streaks:", error);
-  //     }
-  //   }
-  // },
+  setMoneySaved: (saved) => set({ moneySaved: saved }), // Define setMoneySaved
 }));
 
 export default useStore;

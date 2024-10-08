@@ -17,8 +17,6 @@ const userProfile = {
   email: "rushiljalal@gmail.com",
   profilePicture: require("../assets/avatars/whiteman.png"),
   joinDate: "Joined in 2024",
-  bio: "Passionate about epigenetics and helping others recover from addiction.",
-  interests: ["Epigenetics", "Health", "Wellness", "Recovery"],
 };
 
 export default function UserProfile() {
