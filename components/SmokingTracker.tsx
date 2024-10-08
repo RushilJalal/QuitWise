@@ -104,7 +104,7 @@ const SmokingTracker = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Time since last drink:</Text>
+      <Text style={styles.label}>Time since last smoke:</Text>
       <Svg
         height="250"
         width="250"
@@ -135,7 +135,7 @@ const SmokingTracker = () => {
         </Text>
       </Svg>
       <Text style={styles.longestStreak}>
-        Money Saved: Rs. {longestSmokeStreak * 20 * dailyConsumption}{" "}
+        Money saved since last smoke: Rs. {days * 20 * dailyConsumption}
       </Text>
       <Text style={styles.longestStreak}>
         Longest Streak: {longestSmokeStreak}{" "}

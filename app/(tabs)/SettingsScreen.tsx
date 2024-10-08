@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Switch,
@@ -11,6 +11,8 @@ import {
 import { Text, View } from "@/components/Themed";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useNavigation } from "expo-router";
+import { scheduleHourlyNotifications } from "@/components/Notifications";
+import { cancelAllScheduledNotificationsAsync } from "expo-notifications";
 
 const SettingsScreen: React.FC = () => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
@@ -18,6 +20,14 @@ const SettingsScreen: React.FC = () => {
   const [vibrationEnabled, setVibrationEnabled] = useState(false);
   const [dailyLimit, setDailyLimit] = useState(false);
   const [dailyInfo, setDailyInfo] = useState(false);
+
+  useEffect(() => {
+    if (notificationsEnabled) {
+      scheduleHourlyNotifications();
+    } else {
+      cancelAllScheduledNotificationsAsync();
+    }
+  }, [notificationsEnabled]);
 
   const handleContactUs = () => {
     const email = "rushiljalal@gmail.com";

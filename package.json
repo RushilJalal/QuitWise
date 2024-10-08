@@ -54,7 +54,8 @@
     "react-native-svg": "15.2.0",
     "react-native-web": "~0.19.10",
     "react-native-webview": "13.8.6",
-    "zustand": "^4.5.5"
+    "zustand": "^4.5.5",
+    "expo-notifications": "~0.28.18"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",

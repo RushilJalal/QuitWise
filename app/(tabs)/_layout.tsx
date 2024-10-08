@@ -13,6 +13,8 @@ import LeaderboardScreen from "@/app/(tabs)/LeaderboardScreen";
 import SettingsScreen from "@/app/(tabs)/SettingsScreen";
 
 import useStore from "@/useStore";
+import { scheduleHourlyNotifications } from "@/components/Notifications";
+import * as Notifications from "expo-notifications";
 
 const Tabs = createBottomTabNavigator();
 
@@ -25,7 +27,21 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  
+  useEffect(() => {
+    scheduleHourlyNotifications();
+  }, []);
+
+  useEffect(() => {
+    async function requestPermissions() {
+      const { status } = await Notifications.requestPermissionsAsync();
+      if (status === "granted") {
+        await scheduleHourlyNotifications();
+      }
+    }
+
+    requestPermissions();
+  }, []);
+
   return (
     <Tabs.Navigator
       initialRouteName="Home"
