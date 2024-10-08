@@ -172,12 +172,7 @@ export default function UserProfile() {
           </TouchableOpacity>
         </View>
       </Modal>
-      <ButtonLink
-        href=""
-        imageSource={require("../assets/change username.png")}
-        style={styles.profileButtons}
-        onPress={toggleUsernameModal}
-      />
+      
       <Modal isVisible={isUsernameModalVisible}>
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>Change Username</Text>
@@ -198,16 +193,6 @@ export default function UserProfile() {
           </TouchableOpacity>
         </View>
       </Modal>
-      <ButtonLink
-        href=""
-        imageSource={require("../assets/change password.png")}
-        style={styles.profileButtons}
-      />
-      <ButtonLink
-        href=""
-        imageSource={require("../assets/sign out.png")}
-        style={styles.profileButtons}
-      />
       <Modal isVisible={isProfilePictureModalVisible}>
         <View style={styles.modalContent}>
           <ScrollView contentContainerStyle={styles.imageList}>

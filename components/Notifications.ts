@@ -22,7 +22,7 @@ export async function scheduleHourlyNotifications() {
       body: "This is your hourly notification!",
     },
     trigger: {
-      seconds: 1000, // 1 hour in seconds
+      seconds: 200, // 1 hour in seconds
       repeats: true,
     },
   });
