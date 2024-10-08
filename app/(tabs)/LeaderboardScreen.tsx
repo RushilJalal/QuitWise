@@ -31,6 +31,7 @@ const LeaderboardScreen: React.FC = () => {
 
     return (
       <View style={[styles.item, { backgroundColor }]}>
+        <Text style={styles.name}>{index + 1}</Text>
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.points}>{item.points} pts</Text>
       </View>

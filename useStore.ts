@@ -14,6 +14,7 @@ interface StoreState {
   dailyConsumption: number;
   drinkWeeklyConsumption: number;
   moneySaved: number; // Add moneySaved to the interface
+  username: string;
 
   setLastDrinkTime: (time: Date) => void;
   setElapsedDrinkTime: (time: number) => void;
@@ -25,6 +26,7 @@ interface StoreState {
   setSmokeProgress: (progress: number) => void;
   setLongestSmokeStreak: (streak: number) => void;
   setMoneySaved: (saved: number) => void; // Add setMoneySaved to the interface
+  setUsername: (username: string) => void;
 }
 
 const useStore = create<StoreState>((set) => ({
@@ -41,6 +43,7 @@ const useStore = create<StoreState>((set) => ({
   dailyConsumption: 10,
   drinkWeeklyConsumption: 5,
   moneySaved: 0, // Initialize moneySaved
+  username: "Rushil Jalal",
 
   setLastDrinkTime: (time) => set({ lastDrinkTime: time }),
   setElapsedDrinkTime: (time) => set({ elapsedDrinkTime: time }),
@@ -53,6 +56,7 @@ const useStore = create<StoreState>((set) => ({
   setLongestSmokeStreak: (streak: number) =>
     set({ longestSmokeStreak: streak }),
   setMoneySaved: (saved) => set({ moneySaved: saved }), // Define setMoneySaved
+  setUsername: (username) => set({ username }),
 }));
 
 export default useStore;

@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
-  ImageBackground,
 } from "react-native";
 import useStore from "../useStore";
 import ButtonLink from "@/components/ButtonLink";
@@ -28,9 +27,22 @@ const availableImages = [
   require("../assets/avatars/whiteturban.png"),
   require("../assets/avatars/blackturban.png"),
   require("../assets/avatars/blackbraid1.png"),
+  require("../assets/avatars/blackbald.png"),
+  require("../assets/avatars/blackbraid.png"),
+  require("../assets/avatars/shortwhitekurta.png"),
+  require("../assets/avatars/whitewoman.png"),
+  require("../assets/avatars/blackbraidsaree.png"),
+  require("../assets/avatars/blackbraidvest.png"),
+  require("../assets/avatars/whitebald.png"),
+  require("../assets/avatars/blackwomansaree.png"),
+  require("../assets/avatars/blackwomanvest.png"),
+  require("../assets/avatars/whitebraid.png"),
+  require("../assets/avatars/whitebraidkurta.png"),
 ];
 
 export default function UserProfile() {
+  //import username from store
+  const { username, setUsername } = useStore();
   const { longestStreak, longestSmokeStreak } = useStore();
   const [isDailyConsumptionModalVisible, setDailyConsumptionModalVisible] =
     useState(false);
@@ -38,13 +50,12 @@ export default function UserProfile() {
   const [isProfilePictureModalVisible, setProfilePictureModalVisible] =
     useState(false);
   const [dailyConsumption, setDailyConsumption] = useState("");
-  const [username, setUsername] = useState(userProfile.name);
   const [profilePicture, setProfilePicture] = useState(
     userProfile.profilePicture
   );
 
   const [isEditingName, setIsEditingName] = useState(false);
-  const [newName, setNewName] = useState(userProfile.name);
+  const [newName, setNewName] = useState(username);
 
   useEffect(() => {
     const loadStoredData = async () => {
