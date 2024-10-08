@@ -16,6 +16,11 @@ interface StoreState {
   moneySaved: number; // Add moneySaved to the interface
   username: string;
 
+  points: number;
+  questionsAnswered: number;
+  factsRead: number;
+  avatarSrc: string; // Add avatarSrc to the interface
+
   setLastDrinkTime: (time: Date) => void;
   setElapsedDrinkTime: (time: number) => void;
   setProgress: (progress: number) => void;
@@ -27,6 +32,15 @@ interface StoreState {
   setLongestSmokeStreak: (streak: number) => void;
   setMoneySaved: (saved: number) => void; // Add setMoneySaved to the interface
   setUsername: (username: string) => void;
+
+  setquestionsAnswered: (questionsAnswered: number) => void;
+  setfactsRead: (factsRead: number) => void;
+
+  incrementPoints: (value: number) => void; // Add incrementPoints method
+  incrementQuestionsAnswered: (value: number) => void;
+  incrementFactsRead: (value: number) => void;
+
+  setAvatarSrc: (src: string) => void; // Add setAvatarSrc to the interface
 }
 
 const useStore = create<StoreState>((set) => ({
@@ -44,6 +58,10 @@ const useStore = create<StoreState>((set) => ({
   drinkWeeklyConsumption: 5,
   moneySaved: 0, // Initialize moneySaved
   username: "Rushil Jalal",
+  avatarSrc: "assets/avatars/whiteman.png", // Initialize avatarSrc
+  points: 0, // Initialize points
+  questionsAnswered: 0, // Initialize questionsAnswered
+  factsRead: 0, // Initialize factsRead
 
   setLastDrinkTime: (time) => set({ lastDrinkTime: time }),
   setElapsedDrinkTime: (time) => set({ elapsedDrinkTime: time }),
@@ -57,6 +75,16 @@ const useStore = create<StoreState>((set) => ({
     set({ longestSmokeStreak: streak }),
   setMoneySaved: (saved) => set({ moneySaved: saved }), // Define setMoneySaved
   setUsername: (username) => set({ username }),
+
+  setquestionsAnswered: (questionsAnswered) => set({ questionsAnswered }),
+  setfactsRead: (factsRead) => set({ factsRead }),
+  incrementPoints: (value) =>
+    set((state) => ({ points: state.points + value })), // Implement incrementPoints
+  incrementQuestionsAnswered: (value) =>
+    set((state) => ({ questionsAnswered: state.questionsAnswered + value })),
+  incrementFactsRead: (value) =>
+    set((state) => ({ factsRead: state.factsRead + value })),
+  setAvatarSrc: (src) => set({ avatarSrc: src }), // Implement setAvatarSrc
 }));
 
 export default useStore;

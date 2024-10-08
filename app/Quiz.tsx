@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   View,
   Text,
@@ -9,6 +10,8 @@ import {
 import { quizData } from "../data/quizData";
 
 const Quiz = () => {
+  const [points, setPoints] = useState(0);
+  const [questionsAnswered, setQuestionsAnswered] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -22,39 +25,60 @@ const Quiz = () => {
   const [incorrectCount, setIncorrectCount] = useState(0);
   const [optionSelected, setOptionSelected] = useState(false);
 
-  const handleOptionPress = (
+  useEffect(() => {
+    const loadStoredData = async () => {
+      const storedPoints = await AsyncStorage.getItem("points");
+      const storedQuestionsAnswered = await AsyncStorage.getItem(
+        "questionsAnswered"
+      );
+      if (storedPoints !== null) setPoints(parseInt(storedPoints, 10));
+      if (storedQuestionsAnswered !== null)
+        setQuestionsAnswered(parseInt(storedQuestionsAnswered, 10));
+    };
+    loadStoredData();
+  }, []);
+
+  const handleOptionPress = async (
     selectedOption: string,
     optionIndex: number
-  ): void => {
+  ): Promise<void> => {
     if (optionSelected) return;
 
-    const currentQuestion = quizData[currentQuestionIndex];
-    const correctIndex = currentQuestion.options.indexOf(
-      currentQuestion.answer
-    );
+    setOptionSelected(true);
+    const correctOption = quizData[currentQuestionIndex].answer;
+    const isCorrect = selectedOption === correctOption;
 
     setSelectedOptionIndex(optionIndex);
-    setCorrectOptionIndex(correctIndex);
+    setCorrectOptionIndex(
+      quizData[currentQuestionIndex].options.indexOf(correctOption)
+    );
 
-    if (selectedOption === currentQuestion.answer) {
+    if (isCorrect) {
       setScore(score + 1);
       setCorrectCount(correctCount + 1);
+      const newPoints = points + 10;
+      const newQuestionsAnswered = questionsAnswered + 1;
+      setPoints(newPoints);
+      setQuestionsAnswered(newQuestionsAnswered);
+      await AsyncStorage.setItem("points", newPoints.toString());
+      await AsyncStorage.setItem(
+        "questionsAnswered",
+        newQuestionsAnswered.toString()
+      );
     } else {
       setIncorrectCount(incorrectCount + 1);
     }
 
-    setOptionSelected(true);
-
     setTimeout(() => {
+      setOptionSelected(false);
+      setSelectedOptionIndex(null);
+      setCorrectOptionIndex(null);
       if (currentQuestionIndex < quizData.length - 1) {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
-        setSelectedOptionIndex(null);
-        setCorrectOptionIndex(null);
-        setOptionSelected(false);
       } else {
         setShowResult(true);
       }
-    }, 1000); // Delay to show the color change before moving to the next question
+    }, 1000);
   };
 
   if (showResult) {
