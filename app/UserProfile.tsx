@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import {
 import useStore from "../useStore";
 import ButtonLink from "@/components/ButtonLink";
 import Modal from "react-native-modal";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const userProfile = {
   name: "Rushil Jalal",
@@ -41,6 +42,25 @@ export default function UserProfile() {
   const [profilePicture, setProfilePicture] = useState(
     userProfile.profilePicture
   );
+
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [newName, setNewName] = useState(userProfile.name);
+
+  useEffect(() => {
+    const loadStoredData = async () => {
+      let storedName = await AsyncStorage.getItem("name");
+      if (storedName !== null) setNewName(storedName);
+      else {
+        setNewName(userProfile.name);
+      }
+    };
+    loadStoredData();
+  }, []);
+
+  const handleNameSubmit = async () => {
+    await AsyncStorage.setItem("name", newName);
+    setIsEditingName(false);
+  };
 
   const toggleDailyConsumptionModal = () => {
     setDailyConsumptionModalVisible(!isDailyConsumptionModalVisible);
@@ -77,15 +97,21 @@ export default function UserProfile() {
     <ScrollView contentContainerStyle={styles.container}>
       <Image source={profilePicture} style={styles.profilePicture} />
       <TouchableOpacity onPress={toggleProfilePictureModal}>
-        {/* <ImageBackground
-          source={require("../assets/change username.png")}
-          style={styles.overview}
-          imageStyle={styles.buttonImage}
-        >
-        </ImageBackground> */}
         <Text style={styles.changepfp}>Change Profile Picture</Text>
       </TouchableOpacity>
-      <Text style={styles.name}>{username}</Text>
+      {isEditingName ? (
+        <TextInput
+          style={styles.nameInput}
+          value={newName}
+          onChangeText={setNewName}
+          onSubmitEditing={handleNameSubmit}
+          onBlur={handleNameSubmit}
+        />
+      ) : (
+        <TouchableOpacity onPress={() => setIsEditingName(true)}>
+          <Text style={styles.name}>{newName}</Text>
+        </TouchableOpacity>
+      )}
       <Text style={styles.email}>{userProfile.email}</Text>
       <Text style={styles.date}>{userProfile.joinDate}</Text>
       <Text style={styles.title}>Overview:</Text>
@@ -335,5 +361,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#007BFF",
     marginBottom: 16,
+  },
+  nameInput: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 8,
+    borderBottomWidth: 1,
+    borderColor: "#000",
   },
 });
