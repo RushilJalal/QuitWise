@@ -13,6 +13,7 @@ import useStore from "../useStore";
 import ButtonLink from "@/components/ButtonLink";
 import Modal from "react-native-modal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 const userProfile = {
   name: "Rushil Jalal",
@@ -41,6 +42,7 @@ const availableImages = [
 ];
 
 export default function UserProfile() {
+  const navigation = useNavigation();
   //import username from store
   const { username, setUsername } = useStore();
   const { longestStreak, longestSmokeStreak } = useStore();
@@ -57,6 +59,9 @@ export default function UserProfile() {
   const [isEditingName, setIsEditingName] = useState(false);
   const [newName, setNewName] = useState(username);
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [text, setText] = useState("5");
+
   useEffect(() => {
     const loadStoredData = async () => {
       let storedName = await AsyncStorage.getItem("name");
@@ -71,10 +76,6 @@ export default function UserProfile() {
   const handleNameSubmit = async () => {
     await AsyncStorage.setItem("name", newName);
     setIsEditingName(false);
-  };
-
-  const toggleDailyConsumptionModal = () => {
-    setDailyConsumptionModalVisible(!isDailyConsumptionModalVisible);
   };
 
   const toggleUsernameModal = () => {
@@ -148,51 +149,23 @@ export default function UserProfile() {
           </Text>
         </View>
       </View>
-      <ButtonLink
-        href="/UserProfile"
-        imageSource={require("../assets/daily consumption.png")}
-        style={styles.profileButtons}
-        onPress={toggleDailyConsumptionModal}
-      />
-      <Modal isVisible={isDailyConsumptionModalVisible}>
-        <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Enter Daily Consumption</Text>
+      <Text style={styles.title}>Cigarettes Smoked Daily:</Text>
+      <TouchableOpacity onPress={() => setIsEditing(true)}>
+        {isEditing ? (
           <TextInput
-            style={styles.input}
-            keyboardType="numeric"
-            value={dailyConsumption}
-            onChangeText={handleDailyConsumptionChange}
-            placeholder="Enter a number"
+            style={styles.title}
+            value={text}
+            onChangeText={setText}
+            onBlur={() => setIsEditing(false)}
+            autoFocus
           />
-          <TouchableOpacity
-            style={styles.closeButton}
-            onPress={toggleDailyConsumptionModal}
-          >
-            <Text style={styles.closeButtonText}>Close</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
-      
-      <Modal isVisible={isUsernameModalVisible}>
-        <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Change Username</Text>
-          <TextInput
-            style={styles.input}
-            value={username}
-            onChangeText={handleUsernameChange}
-            placeholder="Enter new username"
-          />
-          <TouchableOpacity style={styles.saveButton} onPress={saveUsername}>
-            <Text style={styles.saveButtonText}>Save</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.closeButton}
-            onPress={toggleUsernameModal}
-          >
-            <Text style={styles.closeButtonText}>Close</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
+        ) : (
+          <Text style={styles.title}>{text}</Text>
+        )}
+      </TouchableOpacity>
+      <Text style={styles.title}>Drinks Consumed Weekly:</Text>
+      <Text style={styles.title}>7</Text>
+
       <Modal isVisible={isProfilePictureModalVisible}>
         <View style={styles.modalContent}>
           <ScrollView contentContainerStyle={styles.imageList}>

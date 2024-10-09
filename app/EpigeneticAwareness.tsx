@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "column",
     backgroundColor: "#fff",
+    flex: 1,
   },
   img: {
     width: 300,
