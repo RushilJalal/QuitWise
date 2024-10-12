@@ -37,11 +37,3 @@ This will start the Expo development server, and you can run the app on an emula
 
 - [Expo Documentation](https://docs.expo.dev/)
 - [Node.js Documentation](https://nodejs.org/en/docs/)
-
-### License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-### Acknowledgments
-
-- Thanks to all contributors and the open-source community.
