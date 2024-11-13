@@ -4,7 +4,7 @@ Quitwise is an educational Android app which teaches users about epigenetics and
 
 The app features quizzes, questionnaires, drinking and smoking trackers, VR Therapy, leaderboard, progress tracking and connecting with other users via Discord.
 
-Quitwise won the 1st prize in the problem statement - Epigenetics and VR Therapy🏆
+Quitwise won the **1st prize** in the problem statement - Epigenetics and VR Therapy🏆
 
 ## Screenshots
 <img src="https://github.com/user-attachments/assets/9f02b0c9-9c61-4e84-934f-cd975943d5aa" alt="WhatsApp Image 2024-10-12 at 11 37 28_06bb18be" width="230"/>
@@ -51,4 +51,3 @@ This will start the Expo development server, and you can run the app on an emula
 ### Additional Resources
 
 - [Expo Documentation](https://docs.expo.dev/)
-- [Node.js Documentation](https://nodejs.org/en/docs/)
